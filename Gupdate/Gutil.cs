@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using BepInEx;
 using HG.GeneralSerializer;
+using MonoMod.Cil;
 using RoR2;
 using UnityEngine;
 
@@ -87,6 +88,33 @@ namespace Gupdate
                 return baseValue + ((stack - 1) * stackValue);
             }
             return 0;
+        }
+        public static bool HealthComponent_TakeDamage_TryFindLocDamageIndex(ILCursor iLCursor, out int locDamageIndex)
+        {
+            int i = -1;
+            bool found = iLCursor.TryGotoNext(MoveType.After,
+                x => x.MatchLdarg(1),
+                x => x.MatchLdfld<DamageInfo>(nameof(DamageInfo.damage)),
+                x => x.MatchStloc(out i)
+                );
+            locDamageIndex = i;
+            iLCursor.Index = 0;
+            return found;
+        }
+        public static bool TryFindStackLocIndex(ILCursor iLCursor, Type content, string itemName, out int locStackIndex, bool moveCursorAfter = false)
+        {
+            int i = -1;
+            bool found = iLCursor.TryGotoNext(MoveType.After,
+                x => x.MatchLdsfld(content.GetNestedType("Items").GetField(itemName)),
+                x => x.MatchCallOrCallvirt<Inventory>(nameof(Inventory.GetItemCount)),
+                x => x.MatchStloc(out i)
+                );
+            locStackIndex = i;
+            if (!moveCursorAfter)
+            {
+                iLCursor.Index = 0;
+            }
+            return found;
         }
     }
 }

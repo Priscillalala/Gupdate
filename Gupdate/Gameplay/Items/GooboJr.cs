@@ -16,9 +16,13 @@ namespace Gupdate.Gameplay.Items
 {
     public class GooboJr : ModBehaviour
     {
+        public override (string, string)[] GetLang() => new[]
+        {
+            ("EQUIPMENT_GUMMYCLONE_DESC", "Spawn a gummy clone with <style=cIsDamage>100% damage</style> and <style=cIsHealing>100% health</style> that <style=cIsUtility>inherits all your items</style>. Expires in <style=cIsUtility>30</style> seconds.")
+        };
+
         public void Awake()
         {
-            LanguageAPI.Add("EQUIPMENT_GUMMYCLONE_DESC", "Spawn a gummy clone with <style=cIsDamage>100% damage</style> and <style=cIsHealing>100% health</style> that <style=cIsUtility>inherits all your items</style>. Expires in <style=cIsUtility>30</style> seconds.");
             Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/GummyClone/GummyCloneProjectile.prefab").Completed += handle =>
             {
                 GummyCloneProjectile gummyCloneProjectile = handle.Result.GetComponent<GummyCloneProjectile>();
@@ -61,12 +65,12 @@ namespace Gupdate.Gameplay.Items
                 x => x.MatchNewobj<DirectorSpawnRequest>(),
                 x => x.MatchStloc(out locDirectorSpawnRequestIndex)
                 );*/
-            bool found = c.TryGotoNext(MoveType.Before,
+            ilfound = c.TryGotoNext(MoveType.Before,
                 x => x.MatchCall<DirectorCore>("get_instance"),
                 x => x.MatchLdloc(out locDirectorSpawnRequestIndex),
                 x => x.MatchCallvirt<DirectorCore>(nameof(DirectorCore.TrySpawnObject))
                 );
-            if (found)
+            if (ilfound)
             {
                 c.Emit(OpCodes.Ldarg_0);
                 c.Emit(OpCodes.Ldloc, locDirectorSpawnRequestIndex);

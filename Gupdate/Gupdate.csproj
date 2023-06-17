@@ -17,7 +17,7 @@
 		<PackageReference Include="R2API.Dot" Version="1.0.1" />
 		<PackageReference Include="R2API.Colors" Version="1.0.1" />
 		<PackageReference Include="R2API.ContentManagement" Version="1.0.2" />
-		<PackageReference Include="R2API.Difficulty" Version="1.1.2" />
 		<PackageReference Include="R2API.Language" Version="1.0.1" />
+		<PackageReference Include="R2API.TempVisualEffect" Version="1.0.2" />
 	</ItemGroup>
 </Project>
