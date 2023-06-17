@@ -101,19 +101,15 @@ namespace Gupdate
             iLCursor.Index = 0;
             return found;
         }
-        public static bool TryFindStackLocIndex(ILCursor iLCursor, Type content, string itemName, out int locStackIndex, bool moveCursorAfter = false)
+        public static bool TryGotoStackLocIndex(ILCursor c, Type content, string itemName, out int locStackIndex)
         {
             int i = -1;
-            bool found = iLCursor.TryGotoNext(MoveType.After,
+            bool found = c.TryGotoNext(MoveType.After,
                 x => x.MatchLdsfld(content.GetNestedType("Items").GetField(itemName)),
                 x => x.MatchCallOrCallvirt<Inventory>(nameof(Inventory.GetItemCount)),
                 x => x.MatchStloc(out i)
                 );
             locStackIndex = i;
-            if (!moveCursorAfter)
-            {
-                iLCursor.Index = 0;
-            }
             return found;
         }
     }
