@@ -34,10 +34,16 @@ namespace Gupdate.Gameplay.Items
             MushroomRegen.isCooldown = false;
             MushroomRegen.isDebuff = false;
             MushroomRegen.iconSprite = Addressables.LoadAssetAsync<Sprite>("RoR2/DLC1/MushroomVoid/texBuffMushroomVoidIcon.tif").WaitForCompletion();
+            ContentAddition.AddBuffDef(MushroomRegen);
 
             Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/MushroomVoid/MushroomVoidEffect.prefab").Completed += handle =>
             {
                 TempVisualEffectAPI.AddTemporaryVisualEffect(handle.Result, x => x.HasBuff(MushroomRegen));
+            };
+
+            Addressables.LoadAssetAsync<ItemDef>("RoR2/DLC1/MushroomVoid/MushroomVoid.asset").Completed += handle =>
+            {
+                handle.Result.tags = new[] { ItemTag.Healing, ItemTag.OnKillEffect };
             };
 
             On.RoR2.CharacterBody.AddTimedBuff_BuffDef_float += CharacterBody_AddTimedBuff_BuffDef_float;

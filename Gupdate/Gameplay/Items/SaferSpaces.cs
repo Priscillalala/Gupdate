@@ -34,6 +34,7 @@ namespace Gupdate.Gameplay.Items
             SaferSpace.isDebuff = false;
             SaferSpace.isCooldown = false;
             SaferSpace.iconSprite = Addressables.LoadAssetAsync<Sprite>("RoR2/DLC1/BearVoid/texBuffBearVoidReady.tif").WaitForCompletion();
+			ContentAddition.AddBuffDef(SaferSpace);
 
             TempVisualEffectAPI.AddTemporaryVisualEffect(LegacyResourcesAPI.Load<GameObject>("Prefabs/TemporaryVisualEffects/BearVoidEffect"), body => body.HasBuff(SaferSpace));
         }
