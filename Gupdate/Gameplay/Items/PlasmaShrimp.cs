@@ -47,6 +47,7 @@ namespace Gupdate.Gameplay.Items
                 {
                     c.Previous.Previous.Operand = 0.04f;
                     c.Emit(OpCodes.Ldloc, locStackIndex);
+                    c.Emit(OpCodes.Conv_R4);
                     c.Emit(OpCodes.Mul);
                 }
             }

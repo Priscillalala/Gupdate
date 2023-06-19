@@ -25,7 +25,7 @@ namespace Gupdate.Gameplay.Items
         public override (string, string)[] GetLang() => new[]
         {
             ("ITEM_MOREMISSILE_PICKUP", "Mutually assured destruction."),
-            ("ITEM_MOREMISSILE_DESC", "Whenever a missile fires anywhere, fires <style=cIsDamage>1</style> <style=cStack>(+1 per stack)</style> missiles."),
+            ("ITEM_MOREMISSILE_DESC", "Whenever a <style=cIsDamage>missile</style> is fired anywhere, fires <style=cIsDamage>1 <style=cStack>(+1 per stack)</style> missiles</style>."),
         };
 
         public void Awake()
@@ -97,7 +97,6 @@ namespace Gupdate.Gameplay.Items
             ILCursor c = new ILCursor(il);
 
             ilfound = c.TryGotoNext(MoveType.After,
-            x => x.MatchLdsfld(typeof(DLC1Content.Items).GetField(nameof(DLC1Content.Items.MoreMissile))),
             x => x.MatchCallOrCallvirt<ProjectileManager>(nameof(ProjectileManager.FireProjectile))
             );
 
@@ -130,9 +129,9 @@ namespace Gupdate.Gameplay.Items
         private void MissileUtils_FireMissile_Vector3_CharacterBody_ProcChainMask_GameObject_float_bool_GameObject_DamageColorIndex_Vector3_float_bool(ILContext il)
         {
             ILCursor c = new ILCursor(il);
-            c.Emit(OpCodes.Ldarg, 2);
+            c.Emit(OpCodes.Ldarg, 1);
+            c.Emit(OpCodes.Ldarg, 3);
             c.Emit(OpCodes.Ldarg, 4);
-            c.Emit(OpCodes.Ldarg, 5);
             c.EmitDelegate<Action<CharacterBody, GameObject, float>>(ICBehaviour.OnMissileFired);
 
             ilfound = c.TryGotoNext(MoveType.After,

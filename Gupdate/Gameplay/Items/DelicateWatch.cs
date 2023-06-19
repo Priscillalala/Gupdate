@@ -18,7 +18,7 @@ namespace Gupdate.Gameplay.Items
     {
         public override (string, string)[] GetLang() => new[]
         {
-            ("ITEM_FRAGILEDAMAGEBONUS_DESC", "Increase damage by <style=cIsDamage>12%</style> <style=cStack>(+12% per stack)</style>. Taking damage to below <style=cIsHealth>25% health</style> <style=cIsUtility>breaks</style> this item. Resets on the minute."),
+            ("ITEM_FRAGILEDAMAGEBONUS_DESC", "Increase damage by <style=cIsDamage>12%</style> <style=cStack>(+12% per stack)</style>. Taking damage to below <style=cIsHealth>25% health</style> <style=cIsUtility>breaks</style> this item. <style=cIsUtility>Resets on the minute</style>."),
             ("ITEM_FRAGILEDAMAGEBONUSCONSUMED_PICKUP", "...well, it's still right twice a day. Resets on the minute."),
         };
 
@@ -50,7 +50,7 @@ namespace Gupdate.Gameplay.Items
         public class FragileDamageBonusConsumedBehaviour : BaseItemBodyBehavior
         {
             [ItemDefAssociation(useOnClient = false, useOnServer = true)]
-            public ItemDef GetItemDef() => DLC1Content.Items.FragileDamageBonusConsumed;
+            public static ItemDef GetItemDef() => DLC1Content.Items.FragileDamageBonusConsumed;
 
 
             private int previousMinute;

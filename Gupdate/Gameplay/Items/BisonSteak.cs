@@ -20,7 +20,7 @@ namespace Gupdate.Gameplay.Items
         public override (string, string)[] GetLang() => new[]
         {
             ("ITEM_FLATHEALTH_PICKUP", "Gain 25 max health and slightly increase regeneration."),
-            ("ITEM_FLATHEALTH_DESC", "Increases <style=cIsHealing>maximum health</style> by <style=cIsHealing>25</style> <style=cStack>(+25 per stack)</style> and <style=cIsHealing>base health regeneration</style> by <style=cIsHealing>+0.2 hp/s<style=cStack>(+0.2 hp/s per stack)</style>."),
+            ("ITEM_FLATHEALTH_DESC", "Increases <style=cIsHealing>maximum health</style> by <style=cIsHealing>25</style> <style=cStack>(+25 per stack)</style> and <style=cIsHealing>base health regeneration</style> by <style=cIsHealing>+0.2 hp/s</style> <style=cStack>(+0.2 hp/s per stack)</style>."),
         };
 
         public void Awake()

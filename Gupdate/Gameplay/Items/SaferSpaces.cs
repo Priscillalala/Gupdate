@@ -22,7 +22,7 @@ namespace Gupdate.Gameplay.Items
         public override (string, string)[] GetLang() => new[]
         {
             ("ITEM_BEARVOID_PICKUP", "Gain brief invulnerability after being attacked. <style=cIsVoid>Corrupts all Tougher Times</style>."),
-            ("ITEM_BEARVOID_DESC", "Gain <style=cIsHealing>0.2</style> <style=cStack>(+0.4 per stack)</style> seconds of invulnerability after being attacked. <style=cIsVoid>Corrupts all Tougher Times</style>."),
+            ("ITEM_BEARVOID_DESC", "Gain <style=cIsHealing>0.2 <style=cStack>(+0.4 per stack)</style> seconds of invulnerability</style> after being attacked. <style=cIsVoid>Corrupts all Tougher Times</style>."),
         };
 
         public void Awake()

@@ -22,7 +22,7 @@ namespace Gupdate.Gameplay.Items
         public override (string, string)[] GetLang() => new[]
         {
             ("ITEM_MUSHROOMVOID_PICKUP", "Gain a stacking regeneration boost on kill. <style=cIsVoid>Corrupts all Bustling Fungi</style>."),
-            ("ITEM_MUSHROOMVOID_DESC", "On killing an enemy, boost <style=cIsHealing>base health regeneration</style> by <style=cIsHealing>+1.5 hp/s</style> for <style=cIsUtility>1s (+1s per stack)</style> and refresh all current boosts. <style=cIsVoid>Corrupts all Bustling Fungi</style>."),
+            ("ITEM_MUSHROOMVOID_DESC", "On killing an enemy, boost <style=cIsHealing>base health regeneration</style> by <style=cIsHealing>+1.5 hp/s</style> for <style=cIsUtility>1s</style> <style=cStack>(+1s per stack)</style> and refresh current regeneration boosts. <style=cIsVoid>Corrupts all Bustling Fungi</style>."),
         };
 
         public void Awake()
