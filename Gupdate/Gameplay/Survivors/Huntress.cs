@@ -1,7 +1,5 @@
 ﻿using System;
 using BepInEx;
-using EntityStates.FlyingVermin.Weapon;
-using EntityStates.Vermin.Weapon;
 using R2API;
 using RoR2;
 using RoR2.Projectile;
