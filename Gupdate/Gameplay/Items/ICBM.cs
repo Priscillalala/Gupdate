@@ -25,7 +25,7 @@ namespace Gupdate.Gameplay.Items
         public override (string, string)[] GetLang() => new[]
         {
             ("ITEM_MOREMISSILE_PICKUP", "Mutually assured destruction."),
-            ("ITEM_MOREMISSILE_DESC", "Whenever a <style=cIsDamage>missile</style> is fired anywhere, fires <style=cIsDamage>1 <style=cStack>(+1 per stack)</style> missiles</style>."),
+            ("ITEM_MOREMISSILE_DESC", "Whenever a <style=cIsDamage>missile</style> fires anywhere, launch a <style=cIsDamage>second strike</style> of <style=cIsDamage>1 <style=cStack>(+1 per stack)</style> missiles</style>."),
         };
 
         public void Awake()

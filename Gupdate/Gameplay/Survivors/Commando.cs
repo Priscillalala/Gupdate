@@ -10,6 +10,7 @@ using UnityEngine.Networking;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using RoR2.Skills;
 using UnityEngine.Events;
+using RoR2.Audio;
 
 namespace Gupdate.Gameplay.Monsters
 {
@@ -29,10 +30,10 @@ namespace Gupdate.Gameplay.Monsters
                 handle.Result.TryModifyFieldValue(nameof(FireBarrage.baseBulletCount), 8);
             };
 
-            Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Commando/CommandoBodyBarrage.asset").Completed += handle =>
+            /*Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Commando/CommandoBodyBarrage.asset").Completed += handle =>
             {
                 handle.Result.mustKeyPress = false;
-            };
+            };*/
 
             Addressables.LoadAssetAsync<SkillDef>("RoR2/Base/Commando/CommandoBodyRoll.asset").Completed += handle =>
             {
@@ -58,7 +59,7 @@ namespace Gupdate.Gameplay.Monsters
                 explosion.explosionEffect = impactExplosion.explosionEffect;
                 explosion.falloffModel = BlastAttack.FalloffModel.Linear;
                 explosion.fireChildren = false;
-                explosion.explosionEffect = impactExplosion.explosionEffect;
+                explosion.explosionEffect = impactExplosion.impactEffect;
                 ProjectileFuse fuse = handle.Result.AddComponent<ProjectileFuse>();
                 fuse.fuse = 1f;
                 fuse.onFuse = new UnityEvent();
@@ -68,30 +69,57 @@ namespace Gupdate.Gameplay.Monsters
                 DestroyImmediate(impactExplosion);
             };
 
-            On.RoR2.Skills.SteppedSkillDef.OnFixedUpdate += SteppedSkillDef_OnFixedUpdate;
-            RecalculateStatsAPI.GetStatCoefficients += RecalculateStatsAPI_GetStatCoefficients;
-        }
-
-        private void SteppedSkillDef_OnFixedUpdate(On.RoR2.Skills.SteppedSkillDef.orig_OnFixedUpdate orig, SteppedSkillDef self, GenericSkill skillSlot)
-        {
-            if (self.skillName == "CrocoSlash" && self.canceledFromSprinting && skillSlot.characterBody.isSprinting && skillSlot.stateMachine.state.GetType() == self.activationState.stateType)
+            Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Commando/OmniExplosionVFXCommandoGrenade.prefab").Completed += handle =>
             {
-                ((SteppedSkillDef.InstanceData)skillSlot.skillInstanceData).step = 0;
-            }
-            orig(self, skillSlot);
+                if (handle.Result.transform.TryFind("ScaledHitsparks 1", out Transform scaledHitsparks))
+                {
+                    scaledHitsparks.transform.localScale = Vector3.one * 1.5f;
+                }
+                if (handle.Result.transform.TryFind("ScaledSmoke, Billboard", out Transform scaleSmoke))
+                {
+                    scaleSmoke.transform.localScale = Vector3.one * 1.8f;
+                }
+                if (handle.Result.transform.TryFind("ScaledSmokeRing, Mesh", out Transform scaleSmokeRing))
+                {
+                    scaleSmokeRing.transform.localScale = Vector3.one * 2f;
+                }
+                if (handle.Result.transform.TryFind("Unscaled Flames", out Transform unscaledFlames) && unscaledFlames.TryGetComponent(out ParticleSystem flameParticles))
+                {
+                    var main = flameParticles.main;
+                    main.scalingMode = ParticleSystemScalingMode.Hierarchy;
+                    unscaledFlames.transform.localScale = Vector3.one * 0.8f;
+                }
+                if (handle.Result.transform.TryFind("Unscaled Smoke, Billboard", out Transform unscaledSmoke) && unscaledSmoke.TryGetComponent(out ParticleSystem smokeParticles))
+                {
+                    var main = smokeParticles.main;
+                    main.scalingMode = ParticleSystemScalingMode.Hierarchy;
+                }
+            };
+
+            On.EntityStates.Commando.CommandoWeapon.FirePistol2.OnEnter += FirePistol2_OnEnter;
         }
 
-        private void RecalculateStatsAPI_GetStatCoefficients(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args)
+        private void FirePistol2_OnEnter(On.EntityStates.Commando.CommandoWeapon.FirePistol2.orig_OnEnter orig, FirePistol2 self)
         {
-            args.armorAdd -= sender.GetBuffCount(RoR2Content.Buffs.Blight) * 5f;
+            orig(self);
+            if (self.pistol % 2 != 0)
+            {
+                self.duration *= 1.2f;
+            }
         }
 
         public class SetupFuseEvent : MonoBehaviour
         {
             public void Awake()
             {
-                base.GetComponent<ProjectileFuse>().onFuse.AddListener(base.GetComponent<ProjectileExplosion>().Detonate);
-                Destroy(this);
+                ProjectileFuse fuse = base.GetComponent<ProjectileFuse>();
+                fuse.onFuse.AddListener(PlaySound);
+                fuse.onFuse.AddListener(base.GetComponent<ProjectileExplosion>().Detonate);
+            }
+
+            public void PlaySound()
+            {
+                PointSoundManager.EmitSoundLocal(AkSoundEngine.GetIDFromString("Play_item_proc_behemoth"), base.transform.position);
             }
         }
     }
