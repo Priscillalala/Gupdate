@@ -35,6 +35,7 @@ namespace Gupdate
             assets = AssetBundle.LoadFromFile(Path.Combine(Path.GetDirectoryName(Info.Location), "gupdassets"));
 
             GameObject gupdate = new GameObject(nameof(Gupdate),
+                typeof(Bands),
                 typeof(BenthicBloom),
                 typeof(BisonSteak),
                 typeof(DelicateWatch),
@@ -51,9 +52,12 @@ namespace Gupdate
                 typeof(Wungus),
                 typeof(Mithrix),
                 typeof(Vermin),
+                typeof(XiConstruct),
+                typeof(SiphonedForest),
                 typeof(Acrid),
                 typeof(Captain),
                 typeof(Commando),
+                typeof(Engi),
                 typeof(Huntress),
                 typeof(Merc),
                 typeof(Burn),

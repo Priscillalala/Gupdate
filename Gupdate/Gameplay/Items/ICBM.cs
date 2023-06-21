@@ -22,6 +22,8 @@ namespace Gupdate.Gameplay.Items
 {
     public class ICBM : ModBehaviour
     {
+        private static GameObject ballisticMissile;
+        private static GameObject ballisticMissileGhost;
         public override (string, string)[] GetLang() => new[]
         {
             ("ITEM_MOREMISSILE_PICKUP", "Mutually assured destruction."),
@@ -32,6 +34,48 @@ namespace Gupdate.Gameplay.Items
         {
             ICBehaviour.missileProcChainMask.AddProc(ProcType.Missile);
             ICBehaviour.missileProcChainMask.AddProc(ProcType.MicroMissile);
+
+            ballisticMissile = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Common/MissileProjectile.prefab").WaitForCompletion()
+                .InstantiateClone("BallisticMissileProjectile", true);
+            if (ballisticMissile.TryGetComponent(out ProjectileSingleTargetImpact projectileSingleTargetImpact))
+            {
+                DestroyImmediate(projectileSingleTargetImpact);
+            }
+            ProjectileImpactExplosion impactExplosion = ballisticMissile.AddComponent<ProjectileImpactExplosion>();
+            impactExplosion.blastRadius = 4;
+            impactExplosion.falloffModel = BlastAttack.FalloffModel.None;
+            impactExplosion.applyDot = false;
+            impactExplosion.blastDamageCoefficient = 1;
+            impactExplosion.blastProcCoefficient = 1;
+            impactExplosion.blastAttackerFiltering = AttackerFiltering.Default;
+            impactExplosion.fireChildren = false;
+            impactExplosion.impactEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Common/VFX/OmniExplosionVFXQuick.prefab").WaitForCompletion();
+            impactExplosion.destroyOnEnemy = true;
+            impactExplosion.destroyOnWorld = true;
+            impactExplosion.lifetime = 16f;
+#pragma warning disable CS0618
+            impactExplosion.explosionSoundString = "Play_item_proc_missile_explo";
+#pragma warning restore CS0618
+
+            ballisticMissileGhost = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Common/MissileGhost.prefab").WaitForCompletion()
+                .InstantiateClone("BallisticMissileGhost", false);
+            if (ballisticMissileGhost.transform.TryFind("missile VFX", out Transform missilevfx))
+            {
+                DestroyImmediate(missilevfx.gameObject);
+            }
+            GameObject icbmDisplay = Instantiate(Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/MoreMissile/DisplayICBM.prefab").WaitForCompletion(), ballisticMissileGhost.transform);
+            icbmDisplay.transform.localPosition = new Vector3(0f, 0f, 0.22f);
+            icbmDisplay.transform.localEulerAngles = new Vector3(90f, 0f, 0f);
+            icbmDisplay.transform.localScale = new Vector3(0.15f, 0.18f, 0.15f);
+            ballisticMissileGhost.GetComponentInChildren<Light>().color = new Color(1f, 0.709644f, 0.4009434f);
+            TrailRenderer trail = ballisticMissileGhost.transform.Find("Trail").GetComponent<TrailRenderer>();
+            trail.material = Instantiate(trail.material);
+            trail.material.SetColor("_TintColor", new Color32(255, 111, 101, 255));
+
+            ballisticMissile.GetComponent<ProjectileController>().ghostPrefab = ballisticMissileGhost;
+
+            PrefabAPI.RegisterNetworkPrefab(ballisticMissile);
+            ContentAddition.AddProjectile(ballisticMissile);
 
             IL.RoR2.GlobalEventManager.OnHitEnemy += GlobalEventManager_OnHitEnemy;
             IL.RoR2.DroneWeaponsBoostBehavior.OnEnemyHit += DroneWeaponsBoostBehavior_OnEnemyHit;
@@ -157,7 +201,7 @@ namespace Gupdate.Gameplay.Items
             {
                 FireProjectileInfo fireProjectileInfo = new FireProjectileInfo
                 {
-                    projectilePrefab = GlobalEventManager.CommonAssets.missilePrefab,
+                    projectilePrefab = ballisticMissile,
                     procChainMask = missileProcChainMask,
                     damage = damage,
                     force = 200f,

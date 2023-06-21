@@ -9,6 +9,7 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.Networking;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using RoR2.Items;
+using Mono.Cecil.Cil;
 
 namespace Gupdate.Gameplay.Items
 {
@@ -16,8 +17,8 @@ namespace Gupdate.Gameplay.Items
     {
         public override (string, string)[] GetLang() => new[]
         {
-            ("ITEM_STRENGTHENBURN_PICKUP", "Ignite effects deal double damage. All explosions have a chance to ignite enemies."),
-            ("ITEM_STRENGTHENBURN_DESC", "Ignite effects deal <style=cIsDamage>100%</style> <style=cStack>(+100% per stack)</style> more damage over time. <style=cIsDamage>50%</style> chance for explosive attacks to <style=cIsDamage>ignite</style> enemies."),
+            ("ITEM_STRENGTHENBURN_PICKUP", "Your explosions ignite enemies, and all ignite effects are stronger."),
+            ("ITEM_STRENGTHENBURN_DESC", "<style=cIsDamage>50%</style> chance for explosive attacks to <style=cIsDamage>ignite</style> enemies. Ignite effects deal <style=cIsDamage>100%</style> <style=cStack>(+100% per stack)</style> more damage over time."),
         };
 
         public void Awake()
@@ -44,7 +45,7 @@ namespace Gupdate.Gameplay.Items
 
                 if (ilfound)
                 {
-                    c.Next.Operand = 1;
+                    c.Next.Next.OpCode = OpCodes.Ldc_I4_1;
                 }
 
                 ilfound = c.TryGotoNext(MoveType.After,
