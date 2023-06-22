@@ -29,6 +29,7 @@ namespace Gupdate.Gameplay.Items
         {
             ItemBehaviourUnlinker.Add<MushroomVoidBehavior>();
 
+            MushroomRegen.name = "bdMushroomRegen";
             MushroomRegen.buffColor = new Color32(247, 173, 250, 255);
             MushroomRegen.canStack = true;
             MushroomRegen.isCooldown = false;
@@ -80,6 +81,8 @@ namespace Gupdate.Gameplay.Items
 
         private void CharacterBody_RecalculateStats(ILContext il)
         {
+            int locMultiplierIndex = -1;
+            int locMeatRegenBoostIndex = -1;
             ILCursor c = new ILCursor(il);
             ilfound = c.TryGotoNext(MoveType.After,
                 x => x.MatchLdsfld(typeof(JunkContent.Buffs).GetField(nameof(JunkContent.Buffs.MeatRegenBoost))),
@@ -87,13 +90,20 @@ namespace Gupdate.Gameplay.Items
                 x => x.MatchBrtrue(out _),
                 x => x.MatchLdcR4(out _),
                 x => x.MatchBr(out _),
-                x => x.MatchLdcR4(out _)
+                x => x.MatchLdcR4(out _),
+                x => x.MatchLdloc(out locMultiplierIndex),
+                x => x.MatchMul(),
+                x => x.MatchStloc(out locMeatRegenBoostIndex)
+                ) && c.TryGotoNext(MoveType.After,
+                x => x.MatchLdloc(locMeatRegenBoostIndex),
+                x => x.MatchAdd()
                 );
 
             if (ilfound)
             {
                 c.Emit(OpCodes.Ldarg, 0);
-                c.EmitDelegate<Func<CharacterBody, float>>(body => 1.5f * body.GetBuffCount(MushroomRegen));
+                c.Emit(OpCodes.Ldloc, locMultiplierIndex);
+                c.EmitDelegate<Func<CharacterBody, float, float>>((body, mult) => mult * 1.5f * body.GetBuffCount(MushroomRegen));
                 c.Emit(OpCodes.Add);
             }
         }

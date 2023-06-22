@@ -27,6 +27,7 @@ namespace Gupdate.Gameplay.Monsters
                         case "StrafeStep":
                             skillDriver.maxDistance = 40f;
                             skillDriver.minDistance = 15f;
+                            skillDriver.driverUpdateTimerOverride = 1f;
                             break;
                         case "FleeStep":
                             skillDriver.maxDistance = 15f;

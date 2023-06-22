@@ -29,6 +29,7 @@ namespace Gupdate.Gameplay.Items
         {
             ItemBehaviourUnlinker.Add<BearVoidBehavior>();
 
+			SaferSpace.name = "bdSaferSpace";
             SaferSpace.buffColor = new Color32(174, 108, 209, 255);
             SaferSpace.canStack = false;
             SaferSpace.isDebuff = false;
@@ -72,13 +73,13 @@ namespace Gupdate.Gameplay.Items
 			public void OnIncomingDamageServer(DamageInfo damageInfo)
 			{
 				bool bypassBlock = (damageInfo.damageType & DamageType.BypassBlock) > DamageType.Generic;
-				if (!bypassBlock && damageInfo.damage > 0f)				{
-					EffectData effectData = new EffectData
+				if (!bypassBlock && damageInfo.damage > 0f && body.HasBuff(SaferSpace))				{
+					/*EffectData effectData = new EffectData
 					{
 						origin = damageInfo.position,
 						rotation = Util.QuaternionSafeLookRotation((damageInfo.force != Vector3.zero) ? damageInfo.force : UnityEngine.Random.onUnitSphere)
 					};
-					EffectManager.SpawnEffect(HealthComponent.AssetReferences.bearVoidEffectPrefab, effectData, true);
+					EffectManager.SpawnEffect(HealthComponent.AssetReferences.bearVoidEffectPrefab, effectData, true);*/
 					
 					damageInfo.rejected = true;
 				}

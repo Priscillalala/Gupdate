@@ -15,10 +15,17 @@
 		<PackageReference Include="R2API.Core" Version="5.0.10" />
 		<PackageReference Include="R2API.DamageType" Version="1.0.4" />
 		<PackageReference Include="R2API.Dot" Version="1.0.1" />
+		<PackageReference Include="R2API.Deployable" Version="1.0.1" />
 		<PackageReference Include="R2API.Colors" Version="1.0.1" />
 		<PackageReference Include="R2API.ContentManagement" Version="1.0.2" />
 		<PackageReference Include="R2API.Language" Version="1.0.1" />
 		<PackageReference Include="R2API.TempVisualEffect" Version="1.0.2" />
 		<PackageReference Include="R2API.Prefab" Version="1.0.3" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Reference Include="Unity.Postprocessing.Runtime">
+	    <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Risk of Rain 2\Risk of Rain 2_Data\Managed\Unity.Postprocessing.Runtime.dll</HintPath>
+	  </Reference>
 	</ItemGroup>
 </Project>

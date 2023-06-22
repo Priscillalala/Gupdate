@@ -30,6 +30,8 @@ namespace Gupdate.Gameplay.Items
 
         private void CharacterBody_RecalculateStats(ILContext il)
         {
+            int locMultiplierIndex = -1;
+            int locMeatRegenBoostIndex = -1;
             ILCursor c = new ILCursor(il);
             ilfound = c.TryGotoNext(MoveType.After,
                 x => x.MatchLdsfld(typeof(JunkContent.Buffs).GetField(nameof(JunkContent.Buffs.MeatRegenBoost))),
@@ -37,13 +39,20 @@ namespace Gupdate.Gameplay.Items
                 x => x.MatchBrtrue(out _),
                 x => x.MatchLdcR4(out _),
                 x => x.MatchBr(out _),
-                x => x.MatchLdcR4(out _)
+                x => x.MatchLdcR4(out _),
+                x => x.MatchLdloc(out locMultiplierIndex),
+                x => x.MatchMul(),
+                x => x.MatchStloc(out locMeatRegenBoostIndex)
+                ) && c.TryGotoNext(MoveType.After,
+                x => x.MatchLdloc(locMeatRegenBoostIndex),
+                x => x.MatchAdd()
                 );
 
             if (ilfound)
             {
                 c.Emit(OpCodes.Ldarg, 0);
-                c.EmitDelegate<Func<CharacterBody, float>>(body => 0.2f * body.inventory.GetItemCount(RoR2Content.Items.FlatHealth));
+                c.Emit(OpCodes.Ldloc, locMultiplierIndex);
+                c.EmitDelegate<Func<CharacterBody, float, float>>((body, mult) => mult * (body.inventory ? 0.2f * body.inventory.GetItemCount(RoR2Content.Items.FlatHealth) : 0f));
                 c.Emit(OpCodes.Add);
             }
         }

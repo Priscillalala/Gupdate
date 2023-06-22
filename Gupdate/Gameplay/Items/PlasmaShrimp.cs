@@ -19,7 +19,7 @@ namespace Gupdate.Gameplay.Items
     {
         public override (string, string)[] GetLang() => new[]
         {
-            ("ITEM_MISSILEVOID_DESC", "Gain a <style=cIsHealing>shield</style> equal to <style=cIsHealing>4%</style> <style=cStack>(+4% per stack)</style> of your maximum health. While you have a <style=cIsHealing>shield</style>, hitting an enemy fires a missile that deals <style=cIsDamage>30%</style> <style=cStack>(+60% per stack)</style> base damage. <style=cIsVoid>Corrupts all AtG Missile Mk. 1s</style>."),
+            ("ITEM_MISSILEVOID_DESC", "Gain a <style=cIsHealing>shield</style> equal to <style=cIsHealing>4%</style> <style=cStack>(+4% per stack)</style> of your maximum health. While you have a <style=cIsHealing>shield</style>, <style=cIsDamage>100%</style> chance to fire a missile that deals <style=cIsDamage>30%</style> <style=cStack>(+60% per stack)</style> base damage. <style=cIsVoid>Corrupts all AtG Missile Mk. 1s</style>."),
         };
 
         public void Awake()
