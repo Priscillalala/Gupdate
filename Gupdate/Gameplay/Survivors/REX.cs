@@ -26,12 +26,13 @@ namespace Gupdate.Gameplay.Monsters
 
         public static BuffDef StackableFuiting { get; private set; } = ScriptableObject.CreateInstance<BuffDef>();
         public static NetworkSoundEventDef InjectFruit { get; private set; } = ScriptableObject.CreateInstance<NetworkSoundEventDef>(); 
-        private static DamageAPI.ModdedDamageType fruitinOrFreakin;
+        private static DamageAPI.ModdedDamageType fruitingDotOnHit;
         private static DotController.DotIndex fruitingDot;
 
         public override (string, string)[] GetLang() => new[]
         {
             ("TREEBOT_SPECIAL_ALT1_NAME", "DIRECTIVE: Harvest"),
+            ("TREEBOT_SPECIAL_ALT1_DESCRIPTION", "Fire a bolt that deals <style=cIsDamage>330% damage</style> and <style=cIsDamage>injects</style> an enemy. <style=cIsDamage>Leech health</style> over time to grow <style=cIsHealing>fruits</style> that heal for <style=cIsHealing>25% HP</style>."),
         };
 
         public void Awake()
@@ -45,14 +46,14 @@ namespace Gupdate.Gameplay.Monsters
             ContentAddition.AddBuffDef(StackableFuiting);
 
             InjectFruit.name = "nseInjectFruit";
-            InjectFruit.eventName = "Play_treeBot_R_expire";
+            InjectFruit.eventName = "Play_item_use_passive_healing";
             ContentAddition.AddNetworkSoundEventDef(InjectFruit);
 
-            fruitinOrFreakin = DamageAPI.ReserveDamageType();
+            fruitingDotOnHit = DamageAPI.ReserveDamageType();
             fruitingDot = DotAPI.RegisterDotDef(3f, 1f, DamageColorIndex.Default, null, (controller, stack) => 
             {
-                stack.damageType |= DamageType.BypassArmor;
-                stack.AddModdedDamageType(fruitinOrFreakin);
+                stack.damageType |= DamageType.BypassArmor | DamageType.Silent;
+                //stack.AddModdedDamageType(fruitinOrFreakin);
                 if (stack.attackerObject && stack.attackerObject.TryGetComponent(out CharacterBody attackerBody) && attackerBody.healthComponent)
                 {
                     stack.damage = Math.Max(attackerBody.healthComponent.fullHealth * 0.25f, stack.damage);
@@ -63,12 +64,13 @@ namespace Gupdate.Gameplay.Monsters
             {
                 handle.Result.GetComponentInChildren<GravitatePickup>().gravitateAtFullHealth = false;
                 handle.Result.GetComponent<DestroyOnTimer>().duration = 30f;
+                handle.Result.GetComponent<BeginRapidlyActivatingAndDeactivating>().delayBeforeBeginningBlinking = 29f;
             };
 
             Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Treebot/TreebotFruitSeedProjectile.prefab").Completed += handle =>
             {
                 handle.Result.GetComponent<ProjectileDamage>().damageType &= ~DamageType.FruitOnHit;
-                handle.Result.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>().Add(fruitinOrFreakin);
+                handle.Result.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>().Add(fruitingDotOnHit);
             };
 
             Addressables.LoadAssetAsync<EntityStateConfiguration>("RoR2/Base/Treebot/EntityStates.Treebot.Weapon.FirePlantSonicBoom.asset").Completed += handle =>
@@ -93,7 +95,7 @@ namespace Gupdate.Gameplay.Monsters
                 };
             }
 
-            On.RoR2.DotController.OnDotStackRemovedServer += DotController_OnDotStackRemovedServer;
+            //On.RoR2.DotController.OnDotStackRemovedServer += DotController_OnDotStackRemovedServer;
             On.RoR2.CharacterBody.SetBuffCount += CharacterBody_SetBuffCount;
             DotController.onDotInflictedServerGlobal += DotController_onDotInflictedServerGlobal;
             GlobalEventManager.onServerDamageDealt += GlobalEventManager_onServerDamageDealt;
@@ -102,14 +104,14 @@ namespace Gupdate.Gameplay.Monsters
             On.EntityStates.Treebot.Weapon.ChargeSonicBoom.GetMinimumInterruptPriority += ChargeSonicBoom_GetMinimumInterruptPriority;
         }
 
-        private void DotController_OnDotStackRemovedServer(On.RoR2.DotController.orig_OnDotStackRemovedServer orig, DotController self, object dotStack)
+        /*private void DotController_OnDotStackRemovedServer(On.RoR2.DotController.orig_OnDotStackRemovedServer orig, DotController self, object dotStack)
         {
             orig(self, dotStack);
             if (dotStack is DotController.DotStack && (dotStack as DotController.DotStack).dotIndex == fruitingDot && self.victimBody)
             {
                 self.victimBody.SetBuffCount(StackableFuiting.buffIndex, 0);
             }
-        }
+        }*/
 
         private void CharacterBody_SetBuffCount(On.RoR2.CharacterBody.orig_SetBuffCount orig, CharacterBody self, BuffIndex buffType, int newCount)
         {
@@ -143,26 +145,21 @@ namespace Gupdate.Gameplay.Monsters
         {
             if (inflictDotInfo.dotIndex == fruitingDot)
             {
-                dotController.dotTimers[(int)fruitingDot] = 0f;
+                dotController.dotTimers[(int)fruitingDot] = Math.Min(dotController.dotTimers[(int)fruitingDot], 0.25f);
             }
         }
 
         private void GlobalEventManager_onServerDamageDealt(DamageReport damageReport)
         {
-            if ((damageReport.damageInfo.HasModdedDamageType(fruitinOrFreakin) || damageReport.dotType == fruitingDot) && damageReport.victimBody)
+            if (!damageReport.victimBody)
             {
-                if (DotController.dotControllerLocator.TryGetValue(damageReport.victimBody.gameObject.GetInstanceID(), out DotController dotController)
-                    && dotController.dotStackList.Any(x => x.dotIndex == fruitingDot))
+                return;
+            }
+            if (damageReport.damageInfo.HasModdedDamageType(fruitingDotOnHit))
+            {
+                if (DotController.dotControllerLocator.TryGetValue(damageReport.victimBody.gameObject.GetInstanceID(), out DotController dotController))
                 {
-                    damageReport.victimBody.AddBuff(StackableFuiting);
-                    EffectManager.SpawnEffect(Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Treebot/OmniImpactVFXSlashSyringe.prefab").WaitForCompletion(), new EffectData
-                    {
-                        origin = damageReport.victimBody.corePosition,
-                        rotation = UnityEngine.Random.rotation,
-                        scale = damageReport.victimBody.radius,
-                    }, true);
-                    EntitySoundManager.EmitSoundServer(InjectFruit.index, damageReport.victimBody.gameObject);
-                    return;
+                    dotController.ClearDotStacksForType(fruitingDot);
                 }
                 InflictDotInfo inflictDotInfo = new InflictDotInfo
                 {
@@ -172,6 +169,17 @@ namespace Gupdate.Gameplay.Monsters
                     duration = Mathf.Infinity
                 };
                 DotController.InflictDot(ref inflictDotInfo);
+            }
+            if (damageReport.dotType == fruitingDot)
+            {
+                damageReport.victimBody.AddBuff(StackableFuiting);
+                EffectManager.SpawnEffect(Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Treebot/OmniImpactVFXSlashSyringe.prefab").WaitForCompletion(), new EffectData
+                {
+                    origin = damageReport.victimBody.corePosition,
+                    rotation = UnityEngine.Random.rotation,
+                    scale = damageReport.victimBody.radius,
+                }, true);
+                EntitySoundManager.EmitSoundServer(InjectFruit.index, damageReport.victimBody.gameObject);
             }
         }
 
@@ -251,6 +259,7 @@ namespace Gupdate.Gameplay.Monsters
                     instance.transform.localScale = Vector3.one;
                     NetworkServer.Spawn(instance);
                 }
+                victimBody.SetBuffCount(StackableFuiting.buffIndex, 0);
                 if (DotController.dotControllerLocator.TryGetValue(victimBody.gameObject.GetInstanceID(), out DotController dotController))
                 {
                     dotController.ClearDotStacksForType(fruitingDot);
