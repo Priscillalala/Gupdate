@@ -21,10 +21,10 @@ namespace Gupdate.QOL
         public override (string, string)[] GetLang() => new[]
         {
             (KeyConsumed.nameToken, "Rusted Key (Broken)"),
-            (KeyConsumed.pickupToken, "It has fulfilled its purpose."),
+            (KeyConsumed.pickupToken, "A spent item with no remaining purpose."),
             (KeyConsumed.descriptionToken, "A spent item with no remaining power."),
             (KeyVoidConsumed.nameToken, "Encrusted Key (Broken)"),
-            (KeyVoidConsumed.pickupToken, "It has fulfilled its purpose."),
+            (KeyVoidConsumed.pickupToken, "A spent item with no remaining purpose."),
             (KeyVoidConsumed.descriptionToken, "A spent item with no remaining power."),
         };
 

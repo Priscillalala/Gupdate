@@ -18,12 +18,6 @@ namespace Gupdate.Gameplay.Monsters
 {
     public class REX : ModBehaviour
     {
-        public string[] skillDefsToPromote = new[]
-        {
-            "RoR2/Base/Treebot/TreebotBodyPlantSonicBoom.asset",
-            "RoR2/Base/Treebot/TreebotBodySonicBoom.asset",
-        };
-
         public static BuffDef StackableFuiting { get; private set; } = ScriptableObject.CreateInstance<BuffDef>();
         public static NetworkSoundEventDef InjectFruit { get; private set; } = ScriptableObject.CreateInstance<NetworkSoundEventDef>(); 
         private static DamageAPI.ModdedDamageType fruitingDotOnHit;
@@ -88,7 +82,11 @@ namespace Gupdate.Gameplay.Monsters
                 handle.Result.TryModifyFieldValue(nameof(FireFlower2.baseDuration), 0.8f);
             };
 
-            foreach (string key in skillDefsToPromote)
+            foreach (string key in new[]
+            {
+                "RoR2/Base/Treebot/TreebotBodyPlantSonicBoom.asset",
+                "RoR2/Base/Treebot/TreebotBodySonicBoom.asset",
+            })
             {
                 Addressables.LoadAssetAsync<SkillDef>(key).Completed += handle =>
                 {

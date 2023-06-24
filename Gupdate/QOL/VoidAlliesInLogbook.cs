@@ -14,16 +14,14 @@ namespace Gupdate.QOL
 {
     public class VoidAlliesInLogbook : ModBehaviour
     {
-        public string[] voidAllyBodyKeys = new[]
-        {
-            "RoR2/Base/Nullifier/NullifierAllyBody.prefab",
-            "RoR2/DLC1/VoidJailer/VoidJailerAllyBody.prefab",
-            "RoR2/DLC1/VoidMegaCrab/VoidMegaCrabAllyBody.prefab",
-        };
-
         public void Awake()
         {
-            foreach (string key in voidAllyBodyKeys)
+            foreach (string key in new[]
+            {
+                "RoR2/Base/Nullifier/NullifierAllyBody.prefab",
+                "RoR2/DLC1/VoidJailer/VoidJailerAllyBody.prefab",
+                "RoR2/DLC1/VoidMegaCrab/VoidMegaCrabAllyBody.prefab",
+            })
             {
                 Addressables.LoadAssetAsync<GameObject>(key).Completed += handle =>
                 {

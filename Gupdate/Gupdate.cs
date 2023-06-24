@@ -69,6 +69,7 @@ namespace Gupdate
                 typeof(Huntress),
                 typeof(Merc),
                 typeof(REX),
+                typeof(VoidFiend),
                 typeof(Burn),
                 typeof(LowHealthFraction),
                 typeof(VoidCamp),

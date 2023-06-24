@@ -74,12 +74,12 @@ namespace Gupdate.Gameplay.Items
 			{
 				bool bypassBlock = (damageInfo.damageType & DamageType.BypassBlock) > DamageType.Generic;
 				if (!bypassBlock && damageInfo.damage > 0f && body.HasBuff(SaferSpace))				{
-					/*EffectData effectData = new EffectData
+					EffectData effectData = new EffectData
 					{
 						origin = damageInfo.position,
 						rotation = Util.QuaternionSafeLookRotation((damageInfo.force != Vector3.zero) ? damageInfo.force : UnityEngine.Random.onUnitSphere)
 					};
-					EffectManager.SpawnEffect(HealthComponent.AssetReferences.bearVoidEffectPrefab, effectData, true);*/
+					EffectManager.SpawnEffect(HealthComponent.AssetReferences.bearVoidEffectPrefab, effectData, true);
 					
 					damageInfo.rejected = true;
 				}
