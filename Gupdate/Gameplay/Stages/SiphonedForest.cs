@@ -10,6 +10,7 @@ using UnityEngine.Networking;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using MonoMod.Cil;
 using Mono.Cecil.Cil;
+using UnityEngine.SceneManagement;
 
 namespace Gupdate.Gameplay.Monsters
 {
@@ -26,7 +27,23 @@ namespace Gupdate.Gameplay.Monsters
                 handle.Result.SetFloat("_AlphaBoost", 0.15f);
             };
 
+            SceneManager.activeSceneChanged += SceneManager_activeSceneChanged;
             IL.RoR2.CharacterMotor.PreMove += CharacterMotor_PreMove;
+        }
+
+        private void SceneManager_activeSceneChanged(Scene oldScene, Scene newScene)
+        {
+            if (newScene.name == "snowyforest")
+            {
+                GameObject foliage = GameObject.Find("HOLDER: Foliage ");
+                if (foliage && foliage.transform.TryFind("Trees", out Transform trees))
+                {
+                    foreach (LODGroup lodGroup in trees.GetComponentsInChildren<LODGroup>())
+                    {
+                        lodGroup.size = 600f;
+                    }
+                }
+            }
         }
 
         private void CharacterMotor_PreMove(ILContext il)

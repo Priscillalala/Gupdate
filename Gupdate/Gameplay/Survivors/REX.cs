@@ -65,6 +65,7 @@ namespace Gupdate.Gameplay.Monsters
                 handle.Result.GetComponentInChildren<GravitatePickup>().gravitateAtFullHealth = false;
                 handle.Result.GetComponent<DestroyOnTimer>().duration = 30f;
                 handle.Result.GetComponent<BeginRapidlyActivatingAndDeactivating>().delayBeforeBeginningBlinking = 29f;
+                handle.Result.transform.Find("PickupTrigger").GetComponent<SphereCollider>().radius = 0.5f;
             };
 
             Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Treebot/TreebotFruitSeedProjectile.prefab").Completed += handle =>
