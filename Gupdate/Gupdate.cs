@@ -68,6 +68,7 @@ namespace Gupdate
                 typeof(Engi),
                 typeof(Huntress),
                 typeof(Merc),
+                typeof(Railgunner),
                 typeof(REX),
                 typeof(VoidFiend),
                 typeof(Burn),

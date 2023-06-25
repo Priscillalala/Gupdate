@@ -65,7 +65,7 @@ namespace Gupdate.Gameplay.Items
         {
             bool modified = false;
             if (self.attacker && self.attacker.TryGetComponent(out CharacterBody attackerBody) && attackerBody.HasItem(DLC1Content.Items.StrengthenBurn) 
-                && (self.damageType & DamageType.IgniteOnHit) == 0 && Util.CheckRoll(50f, attackerBody.master))
+                && (self.damageType & DamageType.IgniteOnHit) == 0 && self.baseDamage > 0 && Util.CheckRoll(50f, attackerBody.master))
             {
                 self.damageType |= DamageType.IgniteOnHit;
                 modified = true;
