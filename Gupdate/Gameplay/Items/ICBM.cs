@@ -56,6 +56,7 @@ namespace Gupdate.Gameplay.Items
 #pragma warning disable CS0618
             impactExplosion.explosionSoundString = "Play_item_proc_missile_explo";
 #pragma warning restore CS0618
+            ballisticMissile.GetComponent<ProjectileController>().procCoefficient = 0.5f;
 
             ballisticMissileGhost = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Common/MissileGhost.prefab").WaitForCompletion()
                 .InstantiateClone("BallisticMissileGhost", false);

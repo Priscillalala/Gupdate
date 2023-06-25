@@ -66,6 +66,25 @@ namespace Gupdate.Gameplay.Monsters
             {
                 handle.Result.GetComponent<ProjectileDamage>().damageType &= ~DamageType.FruitOnHit;
                 handle.Result.AddComponent<DamageAPI.ModdedDamageTypeHolderComponent>().Add(fruitingDotOnHit);
+                handle.Result.GetComponent<ProjectileSimple>().desiredForwardSpeed = 130f;
+                handle.Result.GetComponent<SphereCollider>().radius = 0.8f;
+                if (handle.Result.TryGetComponent(out ProjectileImpactExplosion projectileImpactExplosion))
+                {
+                    ProjectileSingleTargetImpact projectileSingleTargetImpact = handle.Result.AddComponent<ProjectileSingleTargetImpact>();
+                    projectileSingleTargetImpact.destroyWhenNotAlive = true;
+                    projectileSingleTargetImpact.destroyOnWorld = true;
+                    projectileSingleTargetImpact.impactEffect = projectileImpactExplosion.impactEffect;
+                    projectileSingleTargetImpact.enemyHitSoundString = "Play_treeBot_R_variant_impact";
+                    projectileSingleTargetImpact.hitSoundString = "Play_treeBot_R_variant_impact";
+                    DestroyImmediate(projectileImpactExplosion);
+                }
+                Rigidbody rigidBody = handle.Result.GetComponent<Rigidbody>();
+                rigidBody.interpolation = RigidbodyInterpolation.Interpolate;
+                rigidBody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+                ProjectileNetworkTransform projectileNetworkTransform = handle.Result.AddComponent<ProjectileNetworkTransform>();
+                projectileNetworkTransform.positionTransmitInterval = 0.03333334f;
+                projectileNetworkTransform.interpolationFactor = 1;
+                projectileNetworkTransform.allowClientsideCollision = false;
             };
 
             Addressables.LoadAssetAsync<EntityStateConfiguration>("RoR2/Base/Treebot/EntityStates.Treebot.Weapon.FirePlantSonicBoom.asset").Completed += handle =>
