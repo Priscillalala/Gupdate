@@ -30,7 +30,7 @@ namespace Gupdate.Gameplay.Monsters
         public override (string, string)[] GetLang() => new[]
         {
             ("RAILGUNNER_SPECIAL_ALT_DESCRIPTION", "<style=cIsUtility>Freezing</style>. Fire <style=cIsDamage>piercing</style> round for <style=cIsDamage>2000% damage</style>."),
-            ("GS_KEYWORD_PASSIVERELOAD", "<style=cKeywordName>Passive Reload</style><style=cSub><style=cIsUtility>Continuously load rounds</style> into your railgun while not firing. Hold up to 12."),
+            ("GS_KEYWORD_PASSIVERELOAD", "<style=cKeywordName>Passive Reload</style><style=cSub><style=cIsUtility>Continuously load rounds</style> into your railgun while not firing. Hold up to 10."),
             ("RAILGUNNER_SECONDARY_ALT_DESCRIPTION", "Activate your <style=cIsUtility>short-range scope</style>, highlighting <style=cIsDamage>Weak Points</style> and transforming your weapon into a quick <style=cIsDamage>500% damage</style> railgun."),
             ("RAILGUNNER_SNIPE_LIGHT_DESCRIPTION", "Launch a light projectile for <style=cIsDamage>500% damage</style>.")
         };
@@ -59,7 +59,7 @@ namespace Gupdate.Gameplay.Monsters
             scopeLight = Addressables.LoadAssetAsync<RailgunSkillDef>("RoR2/DLC1/Railgunner/RailgunnerBodyScopeLight.asset");
             scopeLight.Completed += handle =>
             {
-                handle.Result.baseMaxStock = 12;
+                handle.Result.baseMaxStock = 10;
                 handle.Result.restockOnReload = false;
                 ArrayUtils.ArrayAppend(ref handle.Result.keywordTokens, "GS_KEYWORD_PASSIVERELOAD");
             };
@@ -223,7 +223,7 @@ namespace Gupdate.Gameplay.Monsters
             {
                 get
                 {
-                    return 0.5f / attackSpeedStat;
+                    return 0.425f / attackSpeedStat;
                 }
             }
 

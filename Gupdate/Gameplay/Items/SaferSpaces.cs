@@ -73,7 +73,7 @@ namespace Gupdate.Gameplay.Items
 			public void OnIncomingDamageServer(DamageInfo damageInfo)
 			{
 				bool bypassBlock = (damageInfo.damageType & DamageType.BypassBlock) > DamageType.Generic;
-				if (!bypassBlock && damageInfo.damage > 0f && body.HasBuff(SaferSpace))				{
+				if (!bypassBlock && damageInfo.damage > 0f && body.HasBuff(SaferSpace) && damageInfo.dotIndex == DotController.DotIndex.None)				{
 					EffectData effectData = new EffectData
 					{
 						origin = damageInfo.position,
@@ -87,7 +87,7 @@ namespace Gupdate.Gameplay.Items
 
             public void OnTakeDamageServer(DamageReport damageReport)
             {
-                if (damageReport.attacker && damageReport.dotType == DotController.DotIndex.None)
+                if (damageReport.attacker && damageReport.dotType == DotController.DotIndex.None && damageReport.damageDealt > 0)
                 {
 					body.AddTimedBuff(SaferSpace, Gutil.StackScaling(0.2f, 0.4f, stack));
                 }

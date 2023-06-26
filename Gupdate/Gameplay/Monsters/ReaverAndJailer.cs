@@ -25,7 +25,17 @@ namespace Gupdate.Gameplay.Monsters
                 CharacterBody nullifierBody = handle.Result.GetComponent<CharacterBody>();
                 nullifierBody.baseNameToken = "VOIDJAILER_BODY_NAME";
             };
+            Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Nullifier/NullifierAllyBody.prefab").Completed += handle =>
+            {
+                CharacterBody nullifierBody = handle.Result.GetComponent<CharacterBody>();
+                nullifierBody.baseNameToken = "VOIDJAILER_BODY_NAME";
+            };
             Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/VoidJailer/VoidJailerBody.prefab").Completed += handle =>
+            {
+                CharacterBody voidJailerBody = handle.Result.GetComponent<CharacterBody>();
+                voidJailerBody.baseNameToken = "NULLIFIER_BODY_NAME";
+            };
+            Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/VoidJailer/VoidJailerAllyBody.prefab").Completed += handle =>
             {
                 CharacterBody voidJailerBody = handle.Result.GetComponent<CharacterBody>();
                 voidJailerBody.baseNameToken = "NULLIFIER_BODY_NAME";
