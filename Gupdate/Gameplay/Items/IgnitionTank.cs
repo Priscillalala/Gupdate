@@ -15,6 +15,8 @@ namespace Gupdate.Gameplay.Items
 {
     public class IgnitionTank : ModBehaviour
     {
+        public static DamageAPI.ModdedDamageType NeverIgnite { get; private set; }
+
         public override (string, string)[] GetLang() => new[]
         {
             ("ITEM_STRENGTHENBURN_PICKUP", "Your explosions ignite enemies, and all ignite effects are stronger."),
@@ -23,8 +25,25 @@ namespace Gupdate.Gameplay.Items
 
         public void Awake()
         {
+            NeverIgnite = DamageAPI.ReserveDamageType();
+
+            IL.RoR2.IcicleAuraController.FixedUpdate += IcicleAuraController_FixedUpdate;
             On.RoR2.BlastAttack.Fire += BlastAttack_Fire;
             IL.RoR2.StrengthenBurnUtils.CheckDotForUpgrade += StrengthenBurnUtils_CheckDotForUpgrade;
+        }
+
+        private void IcicleAuraController_FixedUpdate(ILContext il)
+        {
+            ILCursor c = new ILCursor(il);
+
+            if (ilfound = c.TryGotoNext(MoveType.Before, x => x.MatchCallOrCallvirt<BlastAttack>(nameof(BlastAttack.Fire))))
+            {
+                c.EmitDelegate<Func<BlastAttack, BlastAttack>>(blastAttack =>
+                {
+                    blastAttack.AddModdedDamageType(NeverIgnite);
+                    return blastAttack;
+                });
+            }
         }
 
         private void StrengthenBurnUtils_CheckDotForUpgrade(ILContext il)
@@ -49,7 +68,7 @@ namespace Gupdate.Gameplay.Items
                 }
 
                 ilfound = c.TryGotoNext(MoveType.After,
-                x => x.MatchLdflda<InflictDotInfo>(nameof(InflictDotInfo.totalDamage))
+                x => x.MatchLdflda<InflictDotInfo>(nameof(InflictDotInfo.damageMultiplier))
                 ) && c.TryGotoNext(MoveType.After,
                 x => x.MatchLdloc(locMultiplierIndex)
                 );
@@ -65,7 +84,7 @@ namespace Gupdate.Gameplay.Items
         {
             bool modified = false;
             if (self.attacker && self.attacker.TryGetComponent(out CharacterBody attackerBody) && attackerBody.HasItem(DLC1Content.Items.StrengthenBurn) 
-                && (self.damageType & DamageType.IgniteOnHit) == 0 && self.baseDamage > 0 && Util.CheckRoll(50f, attackerBody.master))
+                && (self.damageType & (DamageType.IgniteOnHit | DamageType.PercentIgniteOnHit | DamageType.Freeze2s)) == 0 && !self.HasModdedDamageType(NeverIgnite) && self.baseDamage > 0 && Util.CheckRoll(50f, attackerBody.master))
             {
                 self.damageType |= DamageType.IgniteOnHit;
                 modified = true;
