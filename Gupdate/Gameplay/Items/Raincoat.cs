@@ -17,6 +17,7 @@ namespace Gupdate.Gameplay.Items
     {
         public override (string, string)[] GetLang() => new[]
         {
+            ("ITEM_IMMUNETODEBUFF_PICKUP", "Prevent debuffs, instead gaining a temporary barrier. Recharges over time."),
             ("ITEM_IMMUNETODEBUFF_DESC", "Prevents an incoming <style=cIsDamage>debuff</style> and instead grants a <style=cIsHealing>temporary barrier</style> for <style=cIsHealing>100 health <style=cStack>(+100 per stack)</style></style>. Recharges every <style=cIsUtility>5</style> seconds</style>."),
         };
 

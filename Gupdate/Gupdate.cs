@@ -49,6 +49,7 @@ namespace Gupdate
                 typeof(MedkitAndTooth),
                 typeof(Opal),
                 typeof(PlasmaShrimp),
+                typeof(Polylute),
                 typeof(Preon),
                 typeof(Raincoat),
                 typeof(SaferSpaces),
