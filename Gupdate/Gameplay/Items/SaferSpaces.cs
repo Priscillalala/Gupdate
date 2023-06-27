@@ -22,7 +22,7 @@ namespace Gupdate.Gameplay.Items
         public override (string, string)[] GetLang() => new[]
         {
             ("ITEM_BEARVOID_PICKUP", "Gain brief invulnerability after being attacked. <style=cIsVoid>Corrupts all Tougher Times</style>."),
-            ("ITEM_BEARVOID_DESC", "Gain <style=cIsHealing>0.2 <style=cStack>(+0.4 per stack)</style> seconds of invulnerability</style> after being attacked. <style=cIsVoid>Corrupts all Tougher Times</style>."),
+            ("ITEM_BEARVOID_DESC", "Gain <style=cIsHealing>0.1 <style=cStack>(+0.2 per stack)</style> seconds of invulnerability</style> after being attacked. <style=cIsVoid>Corrupts all Tougher Times</style>."),
         };
 
         public void Awake()
@@ -89,7 +89,7 @@ namespace Gupdate.Gameplay.Items
             {
                 if (damageReport.attacker && damageReport.dotType == DotController.DotIndex.None && damageReport.damageDealt > 0)
                 {
-					body.AddTimedBuff(SaferSpace, Gutil.StackScaling(0.2f, 0.4f, stack));
+					body.AddTimedBuff(SaferSpace, Gutil.StackScaling(0.1f, 0.2f, stack));
                 }
             }
         }
