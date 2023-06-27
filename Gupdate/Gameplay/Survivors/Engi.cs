@@ -99,15 +99,26 @@ namespace Gupdate.Gameplay.Monsters
             Addressables.LoadAssetAsync<EntityStateConfiguration>("RoR2/Base/Engi/EntityStates.Engi.EngiWeapon.FireSpiderMine.asset").Completed += handle =>
             {
                 handle.Result.TryModifyFieldValue(nameof(FireSpiderMine.damageCoefficient), 2f);
+                handle.Result.TryModifyFieldValue(nameof(FireSpiderMine.force), 400f);
             };
             Addressables.LoadAssetAsync<EntityStateConfiguration>("RoR2/Base/Engi/EntityStates.Engi.SpiderMine.Detonate.asset").Completed += handle =>
             {
-                handle.Result.TryModifyFieldValue(nameof(EntityStates.Engi.SpiderMine.Detonate.blastRadius), 10f);
+                handle.Result.TryModifyFieldValue(nameof(EntityStates.Engi.SpiderMine.Detonate.blastRadius), 8f);
             };
 
+            On.EntityStates.Engi.SpiderMine.WaitForTarget.OnEnter += WaitForTarget_OnEnter;
             IL.EntityStates.Engi.SpiderMine.Detonate.OnEnter += Detonate_OnEnter;
             On.EntityStates.Engi.EngiWeapon.ChargeGrenades.OnEnter += ChargeGrenades_OnEnter;
             IL.EntityStates.Engi.EngiWeapon.ChargeGrenades.FixedUpdate += ChargeGrenades_FixedUpdate;
+        }
+
+        private void WaitForTarget_OnEnter(On.EntityStates.Engi.SpiderMine.WaitForTarget.orig_OnEnter orig, EntityStates.Engi.SpiderMine.WaitForTarget self)
+        {
+            if (self.gameObject.TryGetComponent(out SpiderMineController spiderMineController) && !spiderMineController.ShouldPlayArmedSFX())
+            {
+                self.enterSoundString = string.Empty;
+            }
+            orig(self);
         }
 
         private void Detonate_OnEnter(ILContext il)
@@ -123,7 +134,7 @@ namespace Gupdate.Gameplay.Monsters
                 }
             });
 
-            ilfound = c.TryGotoNext(MoveType.Before,
+            /*ilfound = c.TryGotoNext(MoveType.Before,
                 x => x.MatchLdcI4(out _),
                 x => x.MatchStfld<BlastAttack>(nameof(BlastAttack.falloffModel))
                 );
@@ -131,7 +142,7 @@ namespace Gupdate.Gameplay.Monsters
             {
                 c.Next.OpCode = OpCodes.Ldc_I4;
                 c.Next.Operand = (int)BlastAttack.FalloffModel.SweetSpot;
-            }
+            }*/
 
             ilfound = c.TryGotoNext(MoveType.Before,
                 x => x.MatchLdarg(0),
@@ -176,11 +187,22 @@ namespace Gupdate.Gameplay.Monsters
         public class SpiderMineController : MonoBehaviour
         {
             private int detonationCount;
+            private bool hasPlayedArmedSFX;
             private ProjectileController projectileController;
 
             public void Awake()
             {
                 projectileController = base.GetComponent<ProjectileController>();
+            }
+
+            public bool ShouldPlayArmedSFX()
+            {
+                if (!hasPlayedArmedSFX)
+                {
+                    hasPlayedArmedSFX = true;
+                    return true;
+                }
+                return false;
             }
 
             public void OnDetonation(EntityStates.Engi.SpiderMine.Detonate detonate)
