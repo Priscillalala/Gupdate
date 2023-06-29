@@ -16,6 +16,11 @@ namespace Gupdate.Gameplay.Items
 {
     public class Zoea : ModBehaviour
     {
+        public override (string, string)[] GetLang() => new[]
+        {
+            ("ITEM_VOIDMEGACRABITEM_PICKUP", "Periodically recruit allies from the Void. <style=cIsVoid>Corrupts all </style><style=cIsTierBoss>yellow items</style><style=cIsVoid></style>."),
+        };
+
         public void Awake()
         {
             Addressables.LoadAssetAsync<ItemDef>("RoR2/DLC1/VoidMegaCrabItem.asset").Completed += handle =>
