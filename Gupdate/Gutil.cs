@@ -14,6 +14,32 @@ namespace Gupdate
         {
             return child = transform.Find(n);
         }
+        public static bool TryFindCategory(this DirectorCardCategorySelection dccs, string n, out DirectorCardCategorySelection.Category category)
+        {
+            for (int i = 0; i < dccs.categories.Length; i++)
+            {
+                if (string.CompareOrdinal(dccs.categories[i].name, n) == 0)
+                {
+                    category = dccs.categories[i];
+                    return true;
+                }
+            }
+            category = default;
+            return false;
+        }
+        public static bool TryFindCategoryIndex(this DirectorCardCategorySelection dccs, string n, out int index)
+        {
+            for (int i = 0; i < dccs.categories.Length; i++)
+            {
+                if (string.CompareOrdinal(dccs.categories[i].name, n) == 0)
+                {
+                    index = i;
+                    return true;
+                }
+            }
+            index = -1;
+            return false;
+        }
         public static IEnumerable<Transform> AllChildren(this Transform transform)
         {
             for (int i = 0; i < transform.childCount; i++)

@@ -65,6 +65,7 @@ namespace Gupdate
                 typeof(ReaverAndJailer),
                 typeof(Vermin),
                 typeof(XiConstruct),
+                typeof(MeadowMeetsPeak),
                 typeof(Moon),
                 typeof(SiphonedForest),
                 typeof(VoidLocus),

@@ -14,6 +14,7 @@ using RoR2.UI;
 using MonoMod.Cil;
 using Mono.Cecil.Cil;
 using System.Collections;
+using HG;
 
 namespace Gupdate.Gameplay
 {
@@ -73,6 +74,8 @@ namespace Gupdate.Gameplay
             //ContentAddition.AddNetworkedObject(voidStagePP);
             PrefabAPI.RegisterNetworkPrefab(voidCampStageWeather);
 
+            On.RoR2.TeleporterInteraction.AttemptToSpawnAllEligiblePortals += TeleporterInteraction_AttemptToSpawnAllEligiblePortals;
+            On.RoR2.TeleporterInteraction.Start += TeleporterInteraction_Start;
             On.RoR2.ClassicStageInfo.Awake += ClassicStageInfo_Awake;
             On.RoR2.CombatDirector.Awake += CombatDirector_Awake;
             On.RoR2.SceneDirector.PopulateScene += SceneDirector_PopulateScene;
@@ -85,6 +88,40 @@ namespace Gupdate.Gameplay
             SceneCatalog.onMostRecentSceneDefChanged += SceneCatalog_onMostRecentSceneDefChanged;
             On.EntityStates.VoidCamp.Deactivate.OnEnter += Deactivate_OnEnter;
             SceneDirector.onGenerateInteractableCardSelection += SceneDirector_onGenerateInteractableCardSelection;
+        }
+
+        private void TeleporterInteraction_AttemptToSpawnAllEligiblePortals(On.RoR2.TeleporterInteraction.orig_AttemptToSpawnAllEligiblePortals orig, TeleporterInteraction self)
+        {
+            orig(self);
+            if (NetworkServer.active && VoidStageActive)
+            {
+                self.AttemptSpawnPortal(Addressables.LoadAssetAsync<SpawnCard>("RoR2/DLC1/PortalVoid/iscVoidPortal.asset").WaitForCompletion(), 10f, 40f, "PORTAL_VOID_OPEN");
+            }
+        }
+
+        private void TeleporterInteraction_Start(On.RoR2.TeleporterInteraction.orig_Start orig, TeleporterInteraction self)
+        {
+            SpawnCard iscVoidPortal = Addressables.LoadAssetAsync<SpawnCard>("RoR2/DLC1/PortalVoid/iscVoidPortal.asset").WaitForCompletion();
+            for (int i = self.portalSpawners.Length - 1; i >= 0; i--)
+            {
+                if (self.portalSpawners[i].portalSpawnCard == iscVoidPortal)
+                {
+                    DestroyImmediate(self.portalSpawners[i]);
+                    ArrayUtils.ArrayRemoveAtAndResize(ref self.portalSpawners, i);
+                }
+            }
+            orig(self);
+            if (VoidStageActive)
+            {
+                Chat.SendBroadcastChat(new Chat.SimpleChatMessage
+                {
+                    baseToken = "PORTAL_VOID_WILL_OPEN"
+                });
+                if (self.modelChildLocator)
+                {
+                    self.modelChildLocator.FindChild("VoidPortalIndicator").gameObject.SetActive(true);
+                }
+            }
         }
 
         private void ClassicStageInfo_Awake(On.RoR2.ClassicStageInfo.orig_Awake orig, ClassicStageInfo self)
