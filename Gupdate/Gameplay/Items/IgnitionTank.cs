@@ -27,9 +27,24 @@ namespace Gupdate.Gameplay.Items
         {
             NeverIgnite = DamageAPI.ReserveDamageType();
 
+            IL.RoR2.GlobalEventManager.ProcIgniteOnKill += GlobalEventManager_ProcIgniteOnKill;
             IL.RoR2.IcicleAuraController.FixedUpdate += IcicleAuraController_FixedUpdate;
             On.RoR2.BlastAttack.Fire += BlastAttack_Fire;
             IL.RoR2.StrengthenBurnUtils.CheckDotForUpgrade += StrengthenBurnUtils_CheckDotForUpgrade;
+        }
+
+        private void GlobalEventManager_ProcIgniteOnKill(ILContext il)
+        {
+            ILCursor c = new ILCursor(il);
+
+            if (ilfound = c.TryGotoNext(MoveType.Before, x => x.MatchCallOrCallvirt<BlastAttack>(nameof(BlastAttack.Fire))))
+            {
+                c.EmitDelegate<Func<BlastAttack, BlastAttack>>(blastAttack =>
+                {
+                    blastAttack.AddModdedDamageType(NeverIgnite);
+                    return blastAttack;
+                });
+            }
         }
 
         private void IcicleAuraController_FixedUpdate(ILContext il)

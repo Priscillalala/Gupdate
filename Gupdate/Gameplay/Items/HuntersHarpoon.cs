@@ -23,7 +23,11 @@ namespace Gupdate.Gameplay.Items
 
         public void Awake()
         {
-            IL.RoR2.GlobalEventManager.OnCharacterDeath += GlobalEventManager_OnCharacterDeath;
+            Addressables.LoadAssetAsync<Material>("RoR2/DLC1/MoveSpeedOnKill/matGrappleHook.mat").Completed += handle =>
+            {
+                handle.Result.EnableKeyword("DITHER");
+            };
+            //IL.RoR2.GlobalEventManager.OnCharacterDeath += GlobalEventManager_OnCharacterDeath;
         }
 
         private void GlobalEventManager_OnCharacterDeath(ILContext il)
