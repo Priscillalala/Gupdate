@@ -115,7 +115,7 @@
     - Chain Gun Bounces: ~~2~~ ⇒ 0
     - Attack Speed Boost: Removed </br> *Developer Notes: Minion items have traditionally been kept on the weaker side in the past in fear of situations where the player feels like the game is being 'played for them'. Spare Drone Parts frequently leads to such situations, so its power is being brought down to a more manageable level.*
   - **Titanic Knurl**
-    - AAAAAAAAAAAAA
+    - New Effect: Boosts armor and regeneration as health is lost </br> *Developer Notes: Bison Steak landing in Knurl's design space offers a chance to update the item. The stronger regeneration effect should be more noticeable when most needed.*
   - **Safer Spaces**
     - New Effect: Gain invulnerability for a brief time after taking damage
   - **Weeping Fungus**
