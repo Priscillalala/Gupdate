@@ -67,3 +67,14 @@
     - Blight now reduces the victims armor by 5 per stack </br> *Developer Notes: Getting large stacks of Blight on bosses and the like is fun, but the passive really just serves as a damage increase for your poisonous skills. Now, Blight stacks can more actively interact with other Blight stacks and Acrid's other skills.*
     - Vicious Wounds now resets to the first swing of the combo when cancelled by sprint </br> *Developer Notes: Systems changes in previous updates caused Acrid to be able to sprint cancel through the entire Vicious Wounds combo. This means there is no reason not to use the sprint cancel, so that change has been reverted.*
     - Frenzied Leap Damage: ~~550%~~ ⇒ 600%
+  - **Captain**
+    - Vulcan Shotgun bullets have no damage falloff when fully charged
+    - Beacon: Hacking
+      - Reduces costs over time while hacking
+      - Increase hacking time by +50%
+  - **Railgunner**
+    - HH44 Marksman
+      - Damage Per Shot: ~~400%~~ ⇒ 500%
+      - Base Stock: ~~Infinite~~ ⇒ 10
+      - Passively reloads stock while not firing </br> *Developer Notes: HH44 Marksman having no interactions with items like Backup Magazine didn't sit right.*
+    - Update Polar Field Device VFX and SFX
