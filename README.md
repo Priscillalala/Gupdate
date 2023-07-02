@@ -63,3 +63,7 @@
     - DIRECTIVE: Harvest AND Tangling Growth
       - Duration: ~~1s~~ ⇒ 0.8s
       - End lag can be cancelled by both of REX's utilities
+  - **Acrid**
+    - Blight now reduces the victims armor by 5 per stack </br> *Developer Notes: Getting large stacks of Blight on bosses and the like is fun, but the passive really just serves as a damage increase for your poisonous skills. Now, Blight stacks can more actively interact with other Blight stacks and Acrid's other skills.*
+    - Vicious Wounds now resets to the first swing of the combo when cancelled by sprint </br> *Developer Notes: Systems changes in previous updates caused Acrid to be able to sprint cancel through the entire Vicious Wounds combo. This means there is no reason not to use the sprint cancel, so that change has been reverted.*
+    - Frenzied Leap Damage: ~~550%~~ ⇒ 600%
