@@ -1,5 +1,18 @@
 ## Gameplay
 - **General**
   - **Low Health Threshold**
-    - ~~At or below 25%~~ ⇒ Below 25% </br> *Developer Notes: Have fun using those Blood Shrines a second time. Just...be careful.*
-    - 
+    - ~~At or below 25%~~ ⇒ Below 25% </br> *Developer Notes: Have fun using Blood Shrines a second time. Just...be careful.*
+- **Survivors**
+  - **Commando**
+    - Double Tap
+      - Slightly increased the duration of the second shot
+    - Tactical Dive
+      - No longer cancels sprinting for a frame on activation </br> *Developer Notes: Missing the sprint bonus caused dive to travel less distance than expected. It should be a much more viable option now.*
+    - Suppressive Fire
+      - Base Bullet Count: ~~6~~ ⇒ 8
+      - Now has a much more prominent 'auto-aim' effect
+    - Frag Grenade
+      - Explosion Damage Coefficient: ~~700%~~ ⇒ 900%
+      - Blast Damage Falloff: ~~Sweetspot~~ ⇒ Linear
+      - 1s detonation fuse begins immediately rather than after impact
+      - Update explosion VFX and SFX </br> *Developer Notes: Both of Commando's special skills were frequently underwhelming. Suppressive Fire should feel more distinct from Double Tap now; Frag Grenades will be doing roughly the same damage but offer a better reward for perfect explosion placement.*
