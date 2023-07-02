@@ -90,10 +90,20 @@ namespace Gupdate.Gameplay.Monsters
                 };
             }
 
+            On.RoR2.VoidSurvivorController.UpdateUI += VoidSurvivorController_UpdateUI;
             IL.RoR2.UI.SkillIcon.Update += SkillIcon_Update;
             On.RoR2.Skills.SkillDef.IsReady += SkillDef_IsReady;
             //IL.RoR2.Skills.VoidSurvivorSkillDef.HasRequiredCorruption += VoidSurvivorSkillDef_HasRequiredCorruption;
             //On.RoR2.VoidSurvivorController.UpdateUI += VoidSurvivorController_UpdateUI;
+        }
+
+        private void VoidSurvivorController_UpdateUI(On.RoR2.VoidSurvivorController.orig_UpdateUI orig, VoidSurvivorController self)
+        {
+            if (self.corruption > self.maxCorruption)
+            {
+                self._corruption = self.maxCorruption;
+            }
+            orig(self);
         }
 
         private void SkillIcon_Update(ILContext il)

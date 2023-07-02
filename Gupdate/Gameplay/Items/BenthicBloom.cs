@@ -19,14 +19,14 @@ namespace Gupdate.Gameplay.Items
 {
     public class BenthicBloom : ModBehaviour
     {
-        private static List<PickupIndex> tier1DropList;
-        private static ItemDef currentItemDef;
+        //private static List<PickupIndex> tier1DropList;
+        //private static ItemDef currentItemDef;
 
         public void Awake()
         {
             //IL.RoR2.CharacterMaster.OnServerStageBegin += CharacterMaster_OnServerStageBegin;
             On.RoR2.CharacterMaster.OnServerStageBegin += CharacterMaster_OnServerStageBegin;
-            IL.RoR2.CharacterMaster.TryCloverVoidUpgrades += CharacterMaster_TryCloverVoidUpgrades;
+            //IL.RoR2.CharacterMaster.TryCloverVoidUpgrades += CharacterMaster_TryCloverVoidUpgrades;
         }
 
         private void CharacterMaster_OnServerStageBegin(On.RoR2.CharacterMaster.orig_OnServerStageBegin orig, CharacterMaster self, Stage stage)
@@ -58,7 +58,7 @@ namespace Gupdate.Gameplay.Items
             }
         }*/
 
-        private void CharacterMaster_TryCloverVoidUpgrades(ILContext il)
+        /*private void CharacterMaster_TryCloverVoidUpgrades(ILContext il)
         {
             ILCursor c = new ILCursor(il);
 
@@ -122,6 +122,6 @@ namespace Gupdate.Gameplay.Items
                 });
             }
 
-        }
+        }*/
     }
 }

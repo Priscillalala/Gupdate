@@ -18,7 +18,7 @@ namespace Gupdate.Gameplay.Items
     {
         public override (string, string)[] GetLang() => new[]
         {
-            ("EQUIPMENT_GUMMYCLONE_DESC", "Spawn a gummy clone with <style=cIsHealing>300% health</style> that <style=cIsUtility>inherits all your items</style>. Expires in <style=cIsUtility>30</style> seconds.")
+            ("EQUIPMENT_GUMMYCLONE_DESC", "Spawn a gummy clone that <style=cIsUtility>inherits all your items</style>. Expires in <style=cIsUtility>30</style> seconds.")
         };
 
         public void Awake()
@@ -111,7 +111,7 @@ namespace Gupdate.Gameplay.Items
                 //if (ownerBody.inventory) characterMaster.inventory.CopyItemsFrom(ownerBody.inventory);
                 characterMaster.inventory.GiveItem(DLC1Content.Items.GummyCloneIdentifier, 1);
                 //characterMaster.inventory.GiveItem(RoR2Content.Items.BoostDamage, 10);
-                characterMaster.inventory.GiveItem(RoR2Content.Items.BoostHp, 20);
+                //characterMaster.inventory.GiveItem(RoR2Content.Items.BoostHp, 20);
                 characterMaster.inventory.ResetItem(RoR2Content.Items.UseAmbientLevel);
             }
             /*if (gummyCloneProjectile.TryGetComponent(out ProjectileController projectileController) && projectileController.owner && projectileController.owner.TryGetComponent(out CharacterBody ownerBody))

@@ -98,7 +98,7 @@ namespace Gupdate.Gameplay
             {
                 c.MoveAfterLabels();
                 c.Emit(OpCodes.Br, breakLabel);
-                c.EmitDelegate<Action>(() => LogWarning("Break!"));
+                //c.EmitDelegate<Action>(() => LogWarning("Break!"));
                 /*int startIndex = c.Index;
                 ilfound = c.TryGotoNext(MoveType.After,
                 x => x.MatchCallOrCallvirt(typeof(StrengthenBurnUtils).GetMethod(nameof(StrengthenBurnUtils.CheckDotForUpgrade))),

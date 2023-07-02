@@ -12,6 +12,11 @@ namespace Gupdate.Gameplay.Monsters
 {
     public class Huntress : ModBehaviour
     {
+        public override (string, string)[] GetLang() => new[]
+        {
+            ("HUNTRESS_SPECIAL_DESCRIPTION", "<style=cIsUtility>Teleport</style> into the sky. Target an area to rain arrows, <style=cIsUtility>slowing</style> all enemies and dealing <style=cIsDamage>330% damage per second</style>."),
+        };
+
         public void Awake()
         {
             Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Huntress/HuntressArrowRain.prefab").Completed += handle =>

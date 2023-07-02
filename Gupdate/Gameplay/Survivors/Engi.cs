@@ -33,7 +33,7 @@ namespace Gupdate.Gameplay.Monsters
         {
             Addressables.LoadAssetAsync<EntityStateConfiguration>("RoR2/Base/Engi/EntityStates.Engi.Mine.MineArmingWeak.asset").Completed += handle =>
             {
-                handle.Result.TryModifyFieldValue(nameof(BaseMineArmingState.blastRadiusScale), 0.25f);
+                handle.Result.TryModifyFieldValue(nameof(BaseMineArmingState.blastRadiusScale), 0.4f);
             };
 
             Addressables.LoadAssetAsync<EntityStateConfiguration>("RoR2/Base/Engi/EntityStates.Engi.EngiWeapon.ChargeGrenades.asset").Completed += handle =>
