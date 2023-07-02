@@ -32,4 +32,20 @@
       - Improve consistency of the projectile's trajectory against close targets
       - Update visuals to be more consistent between throws
     - Smoke Bomb
-      - Cooldown: ~~6s~~ ⇒ 8s *Developer Notes: Because Smoke Bomb's cooldown ticks down even while the smoke is active, the skill had an incredibly short effective cooldown. A slight cooldown increase should result in more thoughtful Smoke Bomb use and give Lights Out a chance to shine.*
+      - Cooldown: ~~6s~~ ⇒ 8s </br> *Developer Notes: Because Smoke Bomb's cooldown ticks down even while the smoke is active, the skill had an incredibly short effective cooldown. A slight cooldown increase should result in more thoughtful Smoke Bomb use and give Lights Out a chance to shine.*
+  - **Engineer**
+    - Bouncing Grenades
+      - Gains 1 grenade charge immediately upon activating the skill. </br> *Developer Notes: Bouncing Grenades had an uncomfortable period of zero feedback until the first grenade was charged. This change won't be a massive buff, but it should make the skill feel less awkward to use.*
+    - Pressure Mines
+      - Unarmed Mine Explosion Radius: ~~1.6m~~ ⇒ 3.2m
+    - Spider Mines
+      - Explosion Damage: ~~600%~~ ⇒ 200%
+      - Explosion Force: ~~1000~~ ⇒ 400
+      - Explosion Radius: ~~14m~~ ⇒ 8m
+      - Each mine now explodes up to **3 times** before expiring
+    - Bubble Shield
+      - Shield Radius: ~~10m~~ ⇒ 11m </br> *Developer Notes: This is a very minor buff to Bubble Shield, but the increased radius should help it interact better with the camera and feel less claustrophobic.*
+    - TR58 Carbonizer Turret
+      - Walking turrets now sprint when chasing enemies
+
+
