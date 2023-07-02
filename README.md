@@ -12,7 +12,24 @@
       - Base Bullet Count: ~~6~~ ⇒ 8
       - Now has a much more prominent 'auto-aim' effect
     - Frag Grenade
-      - Explosion Damage Coefficient: ~~700%~~ ⇒ 900%
+      - Explosion Damage: ~~700%~~ ⇒ 900%
       - Blast Damage Falloff: ~~Sweetspot~~ ⇒ Linear
       - 1s detonation fuse begins immediately rather than after impact
       - Update explosion VFX and SFX </br> *Developer Notes: Both of Commando's special skills were frequently underwhelming. Suppressive Fire should feel more distinct from Double Tap now; Frag Grenades will be doing roughly the same damage but offer a better reward for perfect explosion placement.*
+  - **Huntress**
+    - Arrow Rain
+      - Proc Coefficient Per Tick: ~~0.2~~ ⇒ 0.5
+      - Slightly extended hitbox upwards to better match visuals
+      - Update description to include accurate damage per second values
+  - **Bandit**
+    - Blast
+      - Reduced spread bloom per shot
+    - Serrated Dagger
+      - Lunges Bandit forwards a short distance when swinging (as the description already indicated)
+    - Serrated Shiv
+      - Damage: ~~240%~~ ⇒ 140%
+      - Base Stock: ~~1~~ ⇒ 2
+      - Improve consistency of the projectile's trajectory against close targets
+      - Update visuals to be more consistent between throws
+    - Smoke Bomb
+      - Cooldown: ~~6s~~ ⇒ 8s *Developer Notes: Because Smoke Bomb's cooldown ticks down even while the smoke is active, the skill had an incredibly short effective cooldown. A slight cooldown increase should result in more thoughtful Smoke Bomb use and give Lights Out a chance to shine.*
