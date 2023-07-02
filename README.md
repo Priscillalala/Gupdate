@@ -14,8 +14,7 @@
     - Frag Grenade
       - Explosion Damage: ~~700%~~ ⇒ 900%
       - Blast Damage Falloff: ~~Sweetspot~~ ⇒ Linear
-      - 1s detonation fuse begins immediately rather than after impact
-      - Update explosion VFX and SFX </br> *Developer Notes: Both of Commando's special skills were frequently underwhelming. Suppressive Fire should feel more distinct from Double Tap now; Frag Grenades will be doing roughly the same damage but offer a better reward for perfect explosion placement.*
+      - 1s detonation fuse begins immediately rather than after impact </br> *Developer Notes: Both of Commando's special skills were frequently underwhelming. Suppressive Fire should feel more distinct from Double Tap now; Frag Grenades will be doing roughly the same damage but offer a better reward for perfect explosion placement.*
   - **Huntress**
     - Arrow Rain
       - Proc Coefficient Per Tick: ~~0.2~~ ⇒ 0.5
@@ -30,7 +29,6 @@
       - Damage: ~~240%~~ ⇒ 140%
       - Base Stock: ~~1~~ ⇒ 2
       - Improve consistency of the projectile's trajectory against close targets
-      - Update visuals to be more consistent between throws
     - Smoke Bomb
       - Cooldown: ~~6s~~ ⇒ 8s </br> *Developer Notes: Because Smoke Bomb's cooldown ticks down even while the smoke is active, the skill had an incredibly short effective cooldown. A slight cooldown increase should result in more thoughtful Smoke Bomb use and give Lights Out a chance to shine.*
   - **Engineer**
@@ -77,4 +75,17 @@
       - Damage Per Shot: ~~400%~~ ⇒ 500%
       - Base Stock: ~~Infinite~~ ⇒ 10
       - Passively reloads stock while not firing </br> *Developer Notes: HH44 Marksman having no interactions with items like Backup Magazine didn't sit right.*
-    - Update Polar Field Device VFX and SFX
+  - **Void Fiend**
+    - Passive Healing to Corruption Ratio: ~~1:1~~ ⇒ 2:1
+    - Suppress
+      - Base Stock: ~~Infinite~~ ⇒ 2
+    - Suppress AND Corrupted Suppress
+      - Cast Duration: ~~2s~~ ⇒ 1.6s
+
+## Quality of Life
+- Fixed some materials not dithering properly, notably on Void Fiend
+- Added descriptions for Void Fiend's corrupted skillset when in a run
+- Update Bandit's Serrated Shiv visuals to be more consistent between throws
+- Update Commando's Frag Grenade explosion SFX and VFX
+- Update Railgunner's Polar Field Device VFX and SFX
+
