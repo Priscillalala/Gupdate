@@ -142,6 +142,35 @@
   - **Eccentric Vase**
     - Quantum Tunnel Duration: ~~30s~~ ⇒ Infinite
     - Each player is limited to 2 quantum tunnels at a time
+- **Monsters**
+  - **Elder Lemurian**
+    - Flame Breath
+      - Damage Tick Frequency: ~~8/s~~ ⇒ 6/s
+      - Total Damage: ~~500%~~ ⇒ 650%
+  - **Blind Pest**
+    - Base Damage: ~~15 (+3 per level)~~ ⇒ 12 (+2.4 per level)
+    - Spit Damage: ~~200%~~ ⇒ 100%
+    - Inflicts poison for 0.75s on hit
+  - **Blind Vermin**
+    - Base Damage: ~~15 (+3 per level)~~ ⇒ 12 (+2.4 per level)
+    - Tongue Lash Damage: ~~150%~~ ⇒ 100%
+    - Inflicts poison for 0.75s on hit
+  - **Gup**
+    - Halved total gold rewards </br> *Developer Notes: Gup was giving 3x the cash per director credits than other monsters due to its splitting behaviour. It will still be ahead of the curve in that regard, but not quite as far ahead.*
+  - **Void Reaver and Void Jailer**
+    - Void Reaver renamed: Void Jailer
+    - Void Jailer renamed: Void Reaver
+    - Void Jailer (previously Void Reaver)
+      - Nullifier bombs now immediately root players for 2 seconds
+    - Void Reaver (previous Void Jailer)
+      - Snare no longer roots players
+  - **Beetle Queen**
+    - Limited to 2 guards at a time
+    - Additional summons will summon beetles
+  - **Xi Construct**
+    - Update AI drivers to be more aggressive
+  - **Mithrix**
+    - Base Health: ~~1000 (+300 per level)~~ ⇒ 1400 (+420 per level)
 
 ## Quality of Life
 - Fixed some materials not dithering properly, notably on Void Fiend
