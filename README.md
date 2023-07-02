@@ -93,6 +93,27 @@
     - Flat Healing: ~~8hp~~ ⇒ 4hp
   - **Oddly-shaped Opal**
     - Armor Bonus: ~~100 (+100 per stack)~~ ⇒ 60 (+60 per stack)
+  - **Kjaro's Band**
+    - Total Damage: ~~300% (+300% per stack)~~ ⇒ 150% (+150% per stack)
+    - Now ignites enemies for additional damage
+  - **Runald's Band**
+    - Total Damage: ~~250% (+250% per stack)~~ ⇒ 200% (+200% per stack)
+  - **Ignition Tank**
+    - Burn Damage Boost: ~~300% (+300% per stack)~~ ⇒ 100% (+100% per stack)
+    - Additional Effect: Gives all of your explosions a 50% chance to ignite enemies
+  - **Pocket I.C.B.M**
+    - Now triggers whenever a missile fires ANYWHERE
+    - Uses a custom missile model
+    - Missiles Fired: ~~2~~ ⇒ 1 (+1 per stack)
+    - Missile Damage Boost: Removed
+  - **Laser Scope**
+    - Grants +5% crit on the first stack like other crit items
+  - **Ben's Raincoat**
+    - Debuffs Prevented: ~~1 (+1 per stack)~~ ⇒ 1
+    - Barrier Granted: ~~10% max hp~~ ⇒ 100 (+100 per stack) hp </br> *Developer Notes: This flat barrier amount should be larger than the previous max hp amount throughout most of the game, and keeps barrier focused on lower-health builds.*
+  - **Spare Drone Parts**
+    - Chain Gun Bounces: ~~2~~ ⇒ 0
+    - Attack Speed Boost: Removed </br> *Developer Notes: Minion items have traditionally been kept on the weaker side in the past in fear of situations where the player feels like the game is being 'played for them'. Spare Drone Parts frequently leads to such situations, so its power is being brought down to a more manageable level.*
 
 ## Quality of Life
 - Fixed some materials not dithering properly, notably on Void Fiend
@@ -101,3 +122,5 @@
 - Update Commando's Frag Grenade explosion SFX and VFX
 - Update Railgunner's Polar Field Device VFX and SFX
 - Fix Void Fiend's corruption meter flickering when permanently corrupted
+- Update Ben's Raincoat buff icon to match other buff icons
+- Update item displays for Spare Drone Parts on some drones
