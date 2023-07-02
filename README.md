@@ -114,6 +114,23 @@
   - **Spare Drone Parts**
     - Chain Gun Bounces: ~~2~~ ⇒ 0
     - Attack Speed Boost: Removed </br> *Developer Notes: Minion items have traditionally been kept on the weaker side in the past in fear of situations where the player feels like the game is being 'played for them'. Spare Drone Parts frequently leads to such situations, so its power is being brought down to a more manageable level.*
+  - **Titanic Knurl**
+    - AAAAAAAAAAAAA
+  - **Safer Spaces**
+    - New Effect: Gain invulnerability for a brief time after taking damage
+  - **Weeping Fungus**
+    - New Effect: Gain a stacking regeneration boost on kill </br> *Developer Notes: These two void whites tended to overshadow their counterparts as well as other items, so their design has been reevaluated.*
+  - **Lysate Cell**
+    - Special Skill Cooldown Reduction: ~~33%~~ ⇒ 15% (+15% per stack)
+  - **Plasma Shrimp**
+    - Shield Granted: ~~10%~~ ⇒ 4% (+4% per stack)
+    - Missile Damage: ~~40% (+40% per stack) TOTAL damage~~ ⇒ 30% (+60% per stack) base damage
+    - Chance to fire missiles now scales off of the attack's proc coefficient
+  - **Polylute**
+    - Lightning Damage Ticks: ~~3 (+3 per stack)~~ ⇒ 2 (+3 per stack)
+    - Delay Between Damage Ticks: ~~0.1s~~ ⇒ 0.15s
+  - **Singularity Band**
+    - Total Damage: ~~100% (+100% per stack)~~ ⇒ 150% (+200% per stack)
 
 ## Quality of Life
 - Fixed some materials not dithering properly, notably on Void Fiend
@@ -124,3 +141,4 @@
 - Fix Void Fiend's corruption meter flickering when permanently corrupted
 - Update Ben's Raincoat buff icon to match other buff icons
 - Update item displays for Spare Drone Parts on some drones
+- Update Polylute VFX and SFX
