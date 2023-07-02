@@ -131,6 +131,17 @@
     - Delay Between Damage Ticks: ~~0.1s~~ ⇒ 0.15s
   - **Singularity Band**
     - Total Damage: ~~100% (+100% per stack)~~ ⇒ 150% (+200% per stack)
+    - Blast Proc Coefficient: ~~1.0~~ ⇒ 0.5 </br> *Developer Notes: Singularity Band's ability to proc other items made its damage deceptively high. A damage increase and a proc coefficient decrease should make the item more clear.*
+  - **Newly Hatched Zoea**
+    - Can no longer be inherited by allies such as Engineer's turrets </br> *Developer Notes: Allies can still acquire indirectly Zoea through Pluripotent Larva, but this will be reserved as a more niche interaction.*
+  - **Executive Card**
+    - Removed cash back on purchase </br> *Developer Notes: Executive Card was consistently too strong in the equipment slot - it will still serve its main purpose but  won't be constantly providing value.*
+  - **Goobo Jr.**
+    - Health and Damage: ~~300%~~ ⇒ 100%
+    - Inherits your items
+  - **Eccentric Vase**
+    - Quantum Tunnel Duration: ~~30s~~ ⇒ Infinite
+    - Each player is limited to 2 quantum tunnels at a time
 
 ## Quality of Life
 - Fixed some materials not dithering properly, notably on Void Fiend
@@ -142,3 +153,4 @@
 - Update Ben's Raincoat buff icon to match other buff icons
 - Update item displays for Spare Drone Parts on some drones
 - Update Polylute VFX and SFX
+- Remote Caffeinator can now hold down buttons on Abandoned Aqueduct
