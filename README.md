@@ -1,0 +1,209 @@
+## Gameplay
+- **General**
+  - **Low Health Threshold**
+    - ~~At or below 25%~~ ⇒ Below 25% </br> *Developer Notes: Have fun using Blood Shrines a second time. Just...be careful.*
+- **Survivors**
+  - **Commando**
+    - Double Tap
+      - Slightly increased the duration of the second shot
+    - Tactical Dive
+      - No longer cancels sprinting for a frame on activation </br> *Developer Notes: Missing the sprint bonus caused dive to travel less distance than expected. It should be a much more viable option now.*
+    - Suppressive Fire
+      - Base Bullet Count: ~~6~~ ⇒ 8
+      - Now has a much more prominent 'auto-aim' effect
+    - Frag Grenade
+      - Explosion Damage: ~~700%~~ ⇒ 900%
+      - Blast Damage Falloff: ~~Sweetspot~~ ⇒ Linear
+      - 1s detonation fuse begins immediately rather than after impact </br> *Developer Notes: Both of Commando's special skills were frequently underwhelming. Suppressive Fire should feel more distinct from Double Tap now; Frag Grenades will be doing roughly the same damage but offer a better reward for perfect explosion placement.*
+  - **Huntress**
+    - Arrow Rain
+      - Proc Coefficient Per Tick: ~~0.2~~ ⇒ 0.5
+      - Slightly extended hitbox upwards to better match visuals
+      - Update description to include accurate damage per second values
+  - **Bandit**
+    - Blast
+      - Reduced spread bloom per shot
+    - Serrated Dagger
+      - Lunges Bandit forwards a short distance when swinging (as the description already indicated)
+    - Serrated Shiv
+      - Damage: ~~240%~~ ⇒ 140%
+      - Base Stock: ~~1~~ ⇒ 2
+      - Improve consistency of the projectile's trajectory against close targets
+    - Smoke Bomb
+      - Cooldown: ~~6s~~ ⇒ 8s </br> *Developer Notes: Because Smoke Bomb's cooldown ticks down even while the smoke is active, the skill had an incredibly short effective cooldown. A slight cooldown increase should result in more thoughtful Smoke Bomb use and give Lights Out a chance to shine.*
+  - **Engineer**
+    - Bouncing Grenades
+      - Gains 1 grenade charge immediately upon activating the skill. </br> *Developer Notes: Bouncing Grenades had an uncomfortable period of zero feedback until the first grenade was charged. This change won't be a massive buff, but it should make the skill feel less awkward to use.*
+    - Pressure Mines
+      - Unarmed Mine Explosion Radius: ~~1.6m~~ ⇒ 3.2m
+    - Spider Mines
+      - Explosion Damage: ~~600%~~ ⇒ 200%
+      - Explosion Force: ~~1000~~ ⇒ 400
+      - Explosion Radius: ~~14m~~ ⇒ 8m
+      - Each mine now explodes up to **3 times** before expiring
+    - Bubble Shield Radius: ~~10m~~ ⇒ 11m </br> *Developer Notes: This is a very minor buff to Bubble Shield, but the increased radius should help it interact better with the camera and feel less claustrophobic.*
+    - TR58 Carbonizer Turret
+      - Walking turrets now sprint when chasing enemies
+  - **Artificer**
+    - Flamethrower Total Damage: ~~2000%~~ ⇒ 2400% </br> *Developer Notes: Burn changes in SotV massively reduced the damage potential of Flame Bolt and Flamethrower. Flame Bolt recieved a damage increase to compensate, but Flamethrower didn't...until now!*
+  - **Mercenary**
+    - Horizontal distance travelled by Whirlwind and Rising Thunder is no longer reduced by attack speed
+    - Eviscerate no longer attempts to target allies
+  - **REX**
+    - Bramble Volley
+      - Healing per hit: ~~10%~~ ⇒ 5%
+    - DIRECTIVE: Harvest
+      - Skill Rework: Deals 25% max hp as damage every 3 seconds to grow a healing fruit. Fruits drop on death or after a maximum of 8 is reached.
+      - Fruit Duration: ~~20s~~ ⇒ 30s
+      - Fruits no longer gravitate towards allies already at full health
+      - Projectile Speed: ~~120m/s~~ ⇒ 130m/s (parity with DIRECTIVE: Inject)
+      - Fixed improper projectile collider and network settings that led to unreliable collisions </br> *Developer Notes: DIRECTIVE: Harvest was a great idea on paper that was very clunky in practice. The additional damage opens up new build possibilities, and it should feel like less of a dead slot when battling final bosses now, too.*
+    - DIRECTIVE: Harvest AND Tangling Growth
+      - Duration: ~~1s~~ ⇒ 0.8s
+      - End lag can be cancelled by both of REX's utilities
+  - **Acrid**
+    - Blight now reduces the victims armor by 5 per stack </br> *Developer Notes: Getting large stacks of Blight on bosses and the like is fun, but the passive really just serves as a damage increase for your poisonous skills. Now, Blight stacks can more actively interact with other Blight stacks and Acrid's other skills.*
+    - Vicious Wounds now resets to the first swing of the combo when cancelled by sprint </br> *Developer Notes: Systems changes in previous updates caused Acrid to be able to sprint cancel through the entire Vicious Wounds combo. This means there is no reason not to use the sprint cancel, so that change has been reverted.*
+    - Frenzied Leap Damage: ~~550%~~ ⇒ 600%
+  - **Captain**
+    - Vulcan Shotgun bullets have no damage falloff when fully charged
+    - Beacon: Hacking
+      - Reduces costs over time while hacking
+      - Increase hacking time by +50%
+  - **Railgunner**
+    - HH44 Marksman
+      - Damage Per Shot: ~~400%~~ ⇒ 500%
+      - Base Stock: ~~Infinite~~ ⇒ 10
+      - Passively reloads stock while not firing </br> *Developer Notes: HH44 Marksman having no interactions with items like Backup Magazine didn't sit right.*
+  - **Void Fiend**
+    - Passive Healing to Corruption Ratio: ~~1:1~~ ⇒ 2:1
+    - Suppress
+      - Base Stock: ~~Infinite~~ ⇒ 2
+    - Suppress AND Corrupted Suppress
+      - Cast Duration: ~~2s~~ ⇒ 1.6s
+- **Items**
+  - **Bison Steak**
+    - Grants +0.2 hp/s regeneration per stack in addition to maximum health
+  - **Delicate Watch**
+    - Damage Boost: ~~20% (+20% per stack)~~ ⇒ 12% (+12% per stack)
+    - Broken watches are now reset one at a time, on the minute </br> *Developer Notes: Most players dislike permanently losing items. Breaking one or two watches will be less punishing than before, but large watch stacks will still be a large gamble.*
+  - **Medkit**
+    - Flat Healing: ~~20hp~~ ⇒ 10hp
+  - **Monster Tooth**
+    - Flat Healing: ~~8hp~~ ⇒ 4hp
+  - **Oddly-shaped Opal**
+    - Armor Bonus: ~~100 (+100 per stack)~~ ⇒ 60 (+60 per stack)
+  - **Kjaro's Band**
+    - Total Damage: ~~300% (+300% per stack)~~ ⇒ 150% (+150% per stack)
+    - Now ignites enemies for additional damage
+  - **Runald's Band**
+    - Total Damage: ~~250% (+250% per stack)~~ ⇒ 200% (+200% per stack)
+  - **Ignition Tank**
+    - Burn Damage Boost: ~~300% (+300% per stack)~~ ⇒ 100% (+100% per stack)
+    - Additional Effect: Gives all of your explosions a 50% chance to ignite enemies
+  - **Pocket I.C.B.M**
+    - Now triggers whenever a missile fires ANYWHERE
+    - Uses a custom missile model
+    - Missiles Fired: ~~2~~ ⇒ 1 (+1 per stack)
+    - Missile Damage Boost: Removed
+  - **Laser Scope**
+    - Grants +5% crit on the first stack like other crit items
+  - **Ben's Raincoat**
+    - Debuffs Prevented: ~~1 (+1 per stack)~~ ⇒ 1
+    - Barrier Granted: ~~10% max hp~~ ⇒ 100 (+100 per stack) hp </br> *Developer Notes: This flat barrier amount should be larger than the previous max hp amount throughout most of the game, and keeps barrier focused on lower-health builds.*
+  - **Spare Drone Parts**
+    - Chain Gun Bounces: ~~2~~ ⇒ 0
+    - Attack Speed Boost: Removed </br> *Developer Notes: Minion items have traditionally been kept on the weaker side in the past in fear of situations where the player feels like the game is being 'played for them'. Spare Drone Parts frequently leads to such situations, so its power is being brought down to a more manageable level.*
+  - **Titanic Knurl**
+    - New Effect: Boosts armor and regeneration as health is lost </br> *Developer Notes: Bison Steak landing in Knurl's design space offers a chance to update the item. The stronger regeneration effect should be more noticeable when most needed.*
+  - **Safer Spaces**
+    - New Effect: Gain invulnerability for a brief time after taking damage
+  - **Weeping Fungus**
+    - New Effect: Gain a stacking regeneration boost on kill </br> *Developer Notes: These two void whites tended to overshadow their counterparts as well as other items, so their design has been reevaluated.*
+  - **Lysate Cell**
+    - Special Skill Cooldown Reduction: ~~33%~~ ⇒ 15% (+15% per stack)
+  - **Plasma Shrimp**
+    - Shield Granted: ~~10%~~ ⇒ 4% (+4% per stack)
+    - Missile Damage: ~~40% (+40% per stack) TOTAL damage~~ ⇒ 30% (+60% per stack) base damage
+    - Chance to fire missiles now scales off of the attack's proc coefficient
+  - **Polylute**
+    - Lightning Damage Ticks: ~~3 (+3 per stack)~~ ⇒ 2 (+3 per stack)
+    - Delay Between Damage Ticks: ~~0.1s~~ ⇒ 0.15s
+  - **Singularity Band**
+    - Total Damage: ~~100% (+100% per stack)~~ ⇒ 150% (+200% per stack)
+    - Blast Proc Coefficient: ~~1.0~~ ⇒ 0.5 </br> *Developer Notes: Singularity Band's ability to proc other items made its damage deceptively high. A damage increase and a proc coefficient decrease should make the item more clear.*
+  - **Newly Hatched Zoea**
+    - Can no longer be inherited by allies such as Engineer's turrets </br> *Developer Notes: Allies can still acquire indirectly Zoea through Pluripotent Larva, but this will be reserved as a more niche interaction.*
+  - **Executive Card**
+    - Removed cash back on purchase </br> *Developer Notes: Executive Card was consistently too strong in the equipment slot - it will still serve its main purpose but  won't be constantly providing value.*
+  - **Goobo Jr.**
+    - Health and Damage: ~~300%~~ ⇒ 100%
+    - Inherits your items
+  - **Eccentric Vase**
+    - Quantum Tunnel Duration: ~~30s~~ ⇒ Infinite
+    - Each player is limited to 2 quantum tunnels at a time
+- **Monsters**
+  - **Elder Lemurian**
+    - Flame Breath
+      - Damage Tick Frequency: ~~8/s~~ ⇒ 6/s
+      - Total Damage: ~~500%~~ ⇒ 650%
+  - **Blind Pest**
+    - Base Damage: ~~15 (+3 per level)~~ ⇒ 12 (+2.4 per level)
+    - Spit Damage: ~~200%~~ ⇒ 100%
+    - Inflicts poison for 0.75s on hit
+  - **Blind Vermin**
+    - Base Damage: ~~15 (+3 per level)~~ ⇒ 12 (+2.4 per level)
+    - Tongue Lash Damage: ~~150%~~ ⇒ 100%
+    - Inflicts poison for 0.75s on hit
+  - **Gup**
+    - Halved total gold rewards </br> *Developer Notes: Gup was giving 3x the cash per director credits than other monsters due to its splitting behaviour. It will still be ahead of the curve in that regard, but not quite as far ahead.*
+  - **Void Reaver and Void Jailer**
+    - Void Reaver renamed: Void Jailer
+    - Void Jailer renamed: Void Reaver
+    - Void Jailer (previously Void Reaver)
+      - Nullifier bombs now immediately root players for 2 seconds
+    - Void Reaver (previous Void Jailer)
+      - Snare no longer roots players
+  - **Beetle Queen**
+    - Limited to 2 guards at a time
+    - Additional summons will summon beetles
+  - **Xi Construct**
+    - Update AI drivers to be more aggressive
+  - **Mithrix**
+    - Base Health: ~~1000 (+300 per level)~~ ⇒ 1400 (+420 per level)
+- **Stages**
+  - **Siphoned Forest**
+    - All characters now move up to 25% faster on ice
+  - **Commencement**
+    - Lunar Chimeras reward no gold on death
+    - Pack your Tomes and Pennies!
+  - **Abyssal Depths and Sky Meadow**
+    - Moved the Construct family from Sky Meadow to Abyssal Depths
+    - Returned Magma Worm to Sky Meadow when SotV is enabled
+  - **Hidden Realms**
+    - Void Locus and The Planetarium
+      - Stage Type: ~~Stage~~ ⇒ Intermission
+    - Gilded Coast and Artifact Reliquary
+      - Stage Type: ~~Intermission~~ ⇒ Stage
+      - Added a shiny new surprised to Gilded Coast!
+
+## Quality of Life
+- Fixed some materials not dithering properly, notably on Void Fiend
+- Added descriptions for Void Fiend's corrupted skillset when in a run
+- Update Bandit's Serrated Shiv visuals to be more consistent between throws
+- Update Commando's Frag Grenade explosion SFX and VFX
+- Update Railgunner's Polar Field Device VFX and SFX
+- Fix Void Fiend's corruption meter flickering when permanently corrupted
+- Update Ben's Raincoat buff icon to match other buff icons
+- Update item displays for Spare Drone Parts on some drones
+- Update Polylute VFX and SFX
+- Remote Caffeinator can now hold down buttons on Abandoned Aqueduct
+- Update aurora material on Siphoned Forest
+- Update Wetland Aspect post processing
+- Added consumed versions of Rusted and Encrusted Key
+- Update Regenerating Scrap (Consumed) icon to match other consumed icons
+- Fixed the Bazaar Seers frequently displaying duplicate locations after Stage 5
+- Update ordering of monsters in the Logbook
+- Update the Trophy Hunter's Tricorn pickup model
+- Fixed Void allies appearing in the Logbook
+- Update Void Barnacle material to be less noisy
