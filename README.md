@@ -81,6 +81,18 @@
       - Base Stock: ~~Infinite~~ ⇒ 2
     - Suppress AND Corrupted Suppress
       - Cast Duration: ~~2s~~ ⇒ 1.6s
+- **Items**
+  - **Bison Steak**
+    - Grants +0.2 hp/s regeneration per stack in addition to maximum health
+  - **Delicate Watch**
+    - Damage Boost: ~~20% (+20% per stack)~~ ⇒ 12% (+12% per stack)
+    - Broken watches are now reset one at a time, on the minute </br> *Developer Notes: Most players dislike permanently losing items. Breaking one or two watches will be less punishing than before, but large watch stacks will still be a large gamble.*
+  - **Medkit**
+    - Flat Healing: ~~20hp~~ ⇒ 10hp
+  - **Monster Tooth**
+    - Flat Healing: ~~8hp~~ ⇒ 4hp
+  - **Oddly-shaped Opal**
+    - Armor Bonus: ~~100 (+100 per stack)~~ ⇒ 60 (+60 per stack)
 
 ## Quality of Life
 - Fixed some materials not dithering properly, notably on Void Fiend
@@ -88,4 +100,4 @@
 - Update Bandit's Serrated Shiv visuals to be more consistent between throws
 - Update Commando's Frag Grenade explosion SFX and VFX
 - Update Railgunner's Polar Field Device VFX and SFX
-
+- Fix Void Fiend's corruption meter flickering when permanently corrupted
