@@ -43,9 +43,23 @@
       - Explosion Force: ~~1000~~ ⇒ 400
       - Explosion Radius: ~~14m~~ ⇒ 8m
       - Each mine now explodes up to **3 times** before expiring
-    - Bubble Shield
-      - Shield Radius: ~~10m~~ ⇒ 11m </br> *Developer Notes: This is a very minor buff to Bubble Shield, but the increased radius should help it interact better with the camera and feel less claustrophobic.*
+    - Bubble Shield Radius: ~~10m~~ ⇒ 11m </br> *Developer Notes: This is a very minor buff to Bubble Shield, but the increased radius should help it interact better with the camera and feel less claustrophobic.*
     - TR58 Carbonizer Turret
       - Walking turrets now sprint when chasing enemies
-
-
+  - **Artificer**
+    - Flamethrower Total Damage: ~~2000%~~ ⇒ 2400% </br> *Developer Notes: Burn changes in SotV massively reduced the damage potential of Flame Bolt and Flamethrower. Flame Bolt recieved a damage increase to compensate, but Flamethrower didn't...until now!*
+  - **Mercenary**
+    - Horizontal distance travelled by Whirlwind and Rising Thunder is no longer reduced by attack speed
+    - Eviscerate no longer attempts to target allies
+  - **REX**
+    - Bramble Volley
+      - Healing per hit: ~~10%~~ ⇒ 5%
+    - DIRECTIVE: Harvest
+      - Skill Rework: Deals 25% max hp as damage every 3 seconds to grow a healing fruit. Fruits drop on death or after a maximum of 8 is reached.
+      - Fruit Duration: ~~20s~~ ⇒ 30s
+      - Fruits no longer gravitate towards allies already at full health
+      - Projectile Speed: ~~120m/s~~ ⇒ 130m/s (parity with DIRECTIVE: Inject)
+      - Fixed improper projectile collider and network settings that led to unreliable collisions </br> *Developer Notes: DIRECTIVE: Harvest was a great idea on paper that was very clunky in practice. The additional damage opens up new build possibilities, and it should feel like less of a dead slot when battling final bosses now, too.*
+    - DIRECTIVE: Harvest AND Tangling Growth
+      - Duration: ~~1s~~ ⇒ 0.8s
+      - End lag can be cancelled by both of REX's utilities
