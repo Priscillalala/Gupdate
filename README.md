@@ -171,6 +171,21 @@
     - Update AI drivers to be more aggressive
   - **Mithrix**
     - Base Health: ~~1000 (+300 per level)~~ ⇒ 1400 (+420 per level)
+- **Stages**
+  - **Siphoned Forest**
+    - All characters now move up to 25% faster on ice
+  - **Commencement**
+    - Lunar Chimeras reward no gold on death
+    - Pack your Tomes and Pennies!
+  - **Abyssal Depths and Sky Meadow**
+    - Moved the Construct family from Sky Meadow to Abyssal Depths
+    - Returned Magma Worm to Sky Meadow when SotV is enabled
+  - **Hidden Realms**
+    - Void Locus and The Planetarium
+      - Stage Type: ~~Stage~~ ⇒ Intermission
+    - Gilded Coast and Artifact Reliquary
+      - Stage Type: ~~Intermission~~ ⇒ Stage
+      - Added a shiny new surprised to Gilded Coast!
 
 ## Quality of Life
 - Fixed some materials not dithering properly, notably on Void Fiend
@@ -183,3 +198,12 @@
 - Update item displays for Spare Drone Parts on some drones
 - Update Polylute VFX and SFX
 - Remote Caffeinator can now hold down buttons on Abandoned Aqueduct
+- Update aurora material on Siphoned Forest
+- Update Wetland Aspect post processing
+- Added consumed versions of Rusted and Encrusted Key
+- Update Regenerating Scrap (Consumed) icon to match other consumed icons
+- Fixed the Bazaar Seers frequently displaying duplicate locations after Stage 5
+- Update ordering of monsters in the Logbook
+- Update the Trophy Hunter's Tricorn pickup model
+- Fixed Void allies appearing in the Logbook
+- Update Void Barnacle material to be less noisy
