@@ -100,7 +100,7 @@
     - Total Damage: ~~250% (+250% per stack)~~ ⇒ 200% (+200% per stack)
   - **Ignition Tank**
     - Burn Damage Boost: ~~300% (+300% per stack)~~ ⇒ 100% (+100% per stack)
-    - Additional Effect: Gives all of your explosions a 50% chance to ignite enemies
+    - Additional Effect: Gives all of your explosions a 50% chance to ignite enemies </br> *Developer Notes: The burn damage bonus of Ignition Tank was so strong that it made designing and balancing new ignite effects difficult. In exchange, Ignition Tank has a bonus effect too help stand on its own.*
   - **Pocket I.C.B.M**
     - Now triggers whenever a missile fires ANYWHERE
     - Uses a custom missile model
