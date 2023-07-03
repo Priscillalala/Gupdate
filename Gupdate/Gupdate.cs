@@ -86,6 +86,7 @@ namespace Gupdate
                 typeof(REX),
                 typeof(VoidFiend),
                 typeof(Burn),
+                typeof(Directors),
                 typeof(LowHealthFraction),
                 typeof(VoidCamp),
                 typeof(VoidCampStages),
