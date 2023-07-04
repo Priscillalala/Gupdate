@@ -67,6 +67,7 @@ namespace Gupdate
                 typeof(Mithrix),
                 typeof(ReaverAndJailer),
                 typeof(Vermin),
+                typeof(Voidling),
                 typeof(XiConstruct),
                 typeof(HiddenRealms),
                 typeof(MeadowMeetsPeak),
