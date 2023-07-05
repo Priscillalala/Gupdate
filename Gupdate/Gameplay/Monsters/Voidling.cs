@@ -24,6 +24,7 @@ namespace Gupdate.Gameplay.Monsters
     public class Voidling : ModBehaviour
     {
         private static GameObject voidRaidCrabCollisionPrefab;
+
         public void Awake()
         {
             Addressables.LoadAssetAsync<Material>("RoR2/DLC1/VoidRaidCrab/matVoidRaidCrabBrain.mat").Completed += handle =>
@@ -42,7 +43,7 @@ namespace Gupdate.Gameplay.Monsters
 
             Addressables.LoadAssetAsync<EntityStateConfiguration>("RoR2/DLC1/VoidRaidCrab/EntityStates.VoidRaidCrab.SpinBeamAttack.asset").Completed += handle =>
             {
-                handle.Result.TryModifyFieldValue(nameof(SpinBeamAttack.revolutionsCurve), AnimationCurve.EaseInOut(0f, 0f, 1f, 1.15f));
+                handle.Result.TryModifyFieldValue(nameof(SpinBeamAttack.revolutionsCurve), AnimationCurve.EaseInOut(0f, 0f, 1f, 1f));
                 handle.Result.TryModifyFieldValue(nameof(SpinBeamAttack.baseDuration), 4f);
             };
 
@@ -77,21 +78,21 @@ namespace Gupdate.Gameplay.Monsters
             legController.replantHeight = striderLegController.replantHeight;
             legController.stabilityRadius = 20f;
             legController.stompRadius = 20f;
-            legController.stompDamageCoefficient = 4f;
+            legController.stompDamageCoefficient = 3f;
             legController.stompProcCoefficient = 1f;
-            legController.baseStompForce = 500f;
-            legController.bonusStompForce = Vector3.up * 500f;
+            legController.baseStompForce = 600f;
+            legController.bonusStompForce = Vector3.up * 600f;
             legController.stompFalloffModel = BlastAttack.FalloffModel.Linear;
             DestroyImmediate(striderLegController);
 
             foreach (MeshCollider collider in mdlVoidRaidCrab.transform.Find("VoidRaidCrabArmature/ROOT/LegBase").GetComponentsInChildren<MeshCollider>())
             {
                 string path = Util.BuildPrefabTransformPath(mdlVoidRaidCrab, collider.transform.parent);
-                LogInfo(path);
+                //LogInfo(path);
                 Transform other = mdlMiniVoidRaidCrab.transform.Find(path);
                 if (other)
                 {
-                    LogWarning("Found!");
+                    //LogWarning("Found!");
                     VoidRaidCrabCollisionProxy proxy = other.gameObject.AddComponent<VoidRaidCrabCollisionProxy>();
                     proxy.position = collider.transform.localPosition;
                     proxy.rotation = collider.transform.localRotation;
@@ -135,12 +136,44 @@ namespace Gupdate.Gameplay.Monsters
                 handle.Result.activationState = new SerializableEntityStateType(typeof(ChargeGravityBump));
             };*/
 
+            Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/VoidRaidCrab/VoidRaidCrabMissileProjectile.prefab").Completed += handle =>
+            {
+                if (handle.Result.TryGetComponent(out ProjectileSteerTowardTarget projectileSteerTowardTarget))
+                {
+                    DestroyImmediate(projectileSteerTowardTarget);
+                }
+                ProjectileDecayingSteerTowardTarget decayingSteerTowardTarget = handle.Result.AddComponent<ProjectileDecayingSteerTowardTarget>();
+                decayingSteerTowardTarget.forcedDelay = 0.75f;
+                decayingSteerTowardTarget.steeringDuration = 1f;
+                decayingSteerTowardTarget.rotationSpeedCurve = AnimationCurve.EaseInOut(0f, 270f, 1f, 90f);
+            };
+
+            Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/VoidRaidCrab/VoidRaidCrabMissileGhost.prefab").Completed += handle =>
+            {
+                handle.Result.transform.Find("Flare").localScale = Vector3.one * 2f;
+                handle.Result.transform.Find("FlashRing").localScale = Vector3.one * 2f;
+            };
+
+            Addressables.LoadAssetAsync<EntityStateConfiguration>("RoR2/DLC1/VoidRaidCrab/EntityStates.VoidRaidCrab.Weapon.FireMissiles.asset").Completed += handle =>
+            {
+                handle.Result.TryModifyFieldValue(nameof(FireMissiles.damageCoefficient), 0.6f);
+            };
+
+            On.EntityStates.VoidRaidCrab.Weapon.FireMissiles.GetRandomRollPitch += FireMissiles_GetRandomRollPitch;
             On.EntityStates.VoidRaidCrab.BaseSpinBeamAttackState.OnEnter += BaseSpinBeamAttackState_OnEnter;
             On.EntityStates.VoidRaidCrab.BaseSpinBeamAttackState.OnExit += BaseSpinBeamAttackState_OnExit;
             On.EntityStates.VoidRaidCrab.BaseSpinBeamAttackState.GetBeamRay += BaseSpinBeamAttackState_GetBeamRay;
             On.EntityStates.VoidRaidCrab.SpinBeamExit.OnEnter += SpinBeamExit_OnEnter;
             On.EntityStates.VoidRaidCrab.VacuumExit.OnEnter += VacuumExit_OnEnter;
             IL.EntityStates.VoidRaidCrab.SpinBeamAttack.FireBeamBulletAuthority += SpinBeamAttack_FireBeamBulletAuthority;
+        }
+
+        private Quaternion FireMissiles_GetRandomRollPitch(On.EntityStates.VoidRaidCrab.Weapon.FireMissiles.orig_GetRandomRollPitch orig, FireMissiles self)
+        {
+            float spreadMultiplier = (self.numWaves + 1 - self.numWavesFired) / (float)self.numWaves;
+            Quaternion lhs = Quaternion.AngleAxis(UnityEngine.Random.Range(0, 360), Vector3.forward);
+            Quaternion rhs = Quaternion.AngleAxis(self.minSpreadDegrees + UnityEngine.Random.Range(0f, 50f * spreadMultiplier), Vector3.left);
+            return lhs * rhs;
         }
 
         private void BaseSpinBeamAttackState_OnEnter(On.EntityStates.VoidRaidCrab.BaseSpinBeamAttackState.orig_OnEnter orig, BaseSpinBeamAttackState self)
@@ -308,7 +341,9 @@ namespace Gupdate.Gameplay.Monsters
                                 feet[j].plantPosition = vector2;
                                 feet[j].stopwatch = 0f;
                                 feet[j].footState = StriderLegController.FootState.Planted;
-                                OnLegPlanted(footTransform, vector2);
+                                Vector3 impactPosition = plantPosition;
+                                impactPosition.y += feet[j].currentYOffsetFromRaycast;
+                                OnLegPlanted(footTransform, impactPosition);
                             }
                         }
                     }
@@ -423,6 +458,50 @@ namespace Gupdate.Gameplay.Monsters
 
                 Destroy(this);
             }
+        }
+
+        [RequireComponent(typeof(ProjectileTargetComponent))]
+        public class ProjectileDecayingSteerTowardTarget : MonoBehaviour
+        {
+            public void Start()
+            {
+                if (!NetworkServer.active)
+                {
+                    base.enabled = false;
+                    return;
+                }
+                targetComponent = base.GetComponent<ProjectileTargetComponent>();
+            }
+
+            public void FixedUpdate()
+            {
+                if (!hasPassedDelay || targetComponent.target)
+                {
+                    stopwatch += Time.fixedDeltaTime;
+                }
+                if (!hasPassedDelay)
+                {
+                    if (stopwatch < forcedDelay)
+                    {
+                        return;
+                    }
+                    hasPassedDelay = true;
+                    stopwatch = 0f;
+                }
+                if (targetComponent.target && stopwatch <= steeringDuration)
+                {
+                    Vector3 directionToTarget = targetComponent.target.transform.position - base.transform.position;
+                    float rotationSpeed = rotationSpeedCurve.Evaluate(Mathf.Clamp01(stopwatch / steeringDuration));
+                    base.transform.forward = Vector3.RotateTowards(base.transform.forward, directionToTarget, rotationSpeed * 0.017453292f * Time.fixedDeltaTime, 0f);
+                }
+            }
+
+            public float steeringDuration;
+            public float forcedDelay;
+            public AnimationCurve rotationSpeedCurve;
+            private float stopwatch;
+            private bool hasPassedDelay;
+            private ProjectileTargetComponent targetComponent;        
         }
     }
 }
