@@ -74,6 +74,7 @@ namespace Gupdate
                 typeof(Moon),
                 typeof(SiphonedForest),
                 typeof(VoidLocus),
+                typeof(VoidRaid),
                 typeof(Wetland),
                 typeof(Acrid),
                 typeof(Artificer),

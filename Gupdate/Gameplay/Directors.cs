@@ -21,7 +21,7 @@ namespace Gupdate.Gameplay
 
         private void CombatDirector_Awake(On.RoR2.CombatDirector.orig_Awake orig, CombatDirector self)
         {
-            if (self.gameObject == DirectorCore.instance.gameObject)
+            if (DirectorCore.instance && self.gameObject == DirectorCore.instance.gameObject)
             {
                 self.creditMultiplier *= multiplier;
                 self.minSeriesSpawnInterval /= multiplier;
